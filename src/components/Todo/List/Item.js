@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Item = props =>
-    <li>
+export default class Item extends React.Component {
+
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        isDone: PropTypes.bool,
+        onChange: PropTypes.func.isRequired
+    };
+
+    /**
+     * The user clicked the checkbox.
+     * Call the corresponding handler with the ID
+     */
+    handleChange = e => this.props.onChange(this.props.id);
+
+    render = () => <li>
         <input
             type="checkbox"
-            defaultChecked={props.isDone}
+            checked={this.props.isDone}
+            onChange={this.handleChange.bind(this)}
         />
-        <span>{props.name}</span>
+        <span>{this.props.name}</span>
     </li>;
-
-Item.propTypes = {
-    isDone: PropTypes.bool,
-    name: PropTypes.string.isRequired
-};
-
-export default Item;
+}
