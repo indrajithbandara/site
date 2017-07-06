@@ -13,7 +13,12 @@ export default class List extends React.Component {
     render = () => <section className="Todo-List">
         <ul>
             {this.props.todos.map(todo =>
-                <Item key={todo.id} onChange={this.props.onChange} {...todo} />
+                <Item
+                    key={todo.id}
+                    onChange={this.props.onChange}
+                    onDelete={this.props.onDelete}
+                    {...todo}
+                />
             )}
         </ul>
     </section>;

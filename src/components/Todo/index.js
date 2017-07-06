@@ -21,42 +21,71 @@ export default class Todo extends React.Component {
         notes:[]
     };
 
+
     /**
-     * Everytime the form changes will call this method with its value
-     * update the state using that value.
+     * Returns an item from the todo state, given an ID
      */
-    handleFormChange = value => this.setState({ current:value });
+    getTodo(id){
+        const index = this.state.todos.findIndex(todo => todo.id === id);
+        if (index === -1){
+            this.setState({
+                notes: [
+                    ...this.state.notes,
+                    { type:'error', value:`Could not find id: ${id}` }
+                ]
+            });
+            return { index }
+        }
+        return { index, todo:this.state.todos[index] };
+    }
+
+    /**
+     * The form received new text.
+     * - Update the state for current value.
+     */
+    handleFormChange(value){
+        this.setState({ current:value });
+    }
 
     /**
      * The form was submitted.
      * - Validate value, if error found append a note.
      * - if value is valid, append the todo.
      */
-    handleFormSubmit = value => {
+    handleFormSubmit(value){
         if (!value) {
             const note = { type:'error', value:'Expecting a todo' };
             return this.setState({ notes: this.state.notes.concat(note) });
         }
         const todos = this.state.todos.concat({ name:value, isDone:false });
         this.setState({ todos, current:'', notes:[] });
-    }
+    };
+
 
     /**
      * A ToDo item changed status
-     * - Make sure the index exists. If it doesn't send an errror.
-     * - Replace item usinf index without modifyng the current state.
+     * - Replace item using index without modifyng the current state.
      */
-    handleListChange = id => {
-        const index = this.state.todos.findIndex(todo => todo.id === id);
-        if (index === -1) return this.setState({
-            notes:this.state.notes.concat({ type:'error', value:'Invalid Index!' })
-        });
-        const todo = this.state.todos[index];
-        this.setState({
+    handleTodoChange(id) {
+        const {index, todo} = this.getTodo(id);
+        if (todo) this.setState({
             todos: this.state.todos
                 .slice(0, index)
                 .concat({ ...todo, isDone:!todo.isDone })
-                .concat(this.state.todos.slice(index +1))
+                .concat(this.state.todos.slice(index+1))
+        });
+    };
+
+    /**
+     * A ToDo item is marked for deletion.
+     * - Remove item from the state array withour modifying current state.
+     */
+    handleTodoDelete(id) {
+        const {index, todo} = this.getTodo(id);
+        if (todo) this.setState({
+            todos: this.state.todos
+                .slice(0, index)
+                .concat(this.state.todos.slice(index+1))
         });
     }
 
@@ -69,7 +98,8 @@ export default class Todo extends React.Component {
         />
         <List
             todos={this.state.todos}
-            onChange={this.handleListChange.bind(this)}
+            onChange={this.handleTodoChange.bind(this)}
+            onDelete={this.handleTodoDelete.bind(this)}
         />
     </section>;
 
