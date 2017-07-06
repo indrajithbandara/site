@@ -61,3 +61,7 @@
 .Todo-List-Item:hover pre {
   opacity:1;
 }
+
+.Todo-Filter a {
+  margin: 0 0.5rem;
+}
