@@ -1,8 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+// Enable make the app progressive (available offline)
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// The Router pieces needed to render
+import {
+    Switch,
+    Route,
+    BrowserRouter as Router
+} from 'react-router-dom';
+
+// Template parts
+import Header from './template/Header';
+import Footer from './template/Footer';
+
+// Routes
+import Home from './routes/Home';
+import Todo from './components/Todo';
+
+// Render the application
+ReactDOM.render(
+    <Router>
+        <main>
+            <Header/>
+            <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route path='/todo' component={Todo}/>
+            </Switch>
+            <Footer/>
+        </main>
+    </Router>,
+    document.getElementById('root')
+);
+
 registerServiceWorker();

@@ -58,7 +58,7 @@ export default class Todo extends React.Component {
             const note = { type:'error', value:'Expecting a todo' };
             return this.setState({ notes: this.state.notes.concat(note) });
         }
-        this.setState({
+        return this.setState({
             notes:[],
             current:'',
             todos:this.state.todos.concat({ id:Hash(), name:value, isDone:false })
