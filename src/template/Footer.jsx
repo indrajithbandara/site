@@ -9,7 +9,7 @@ const Component = Style.footer`
     justify-content: center;
     align-items: center;
 
-    > h6 {
+    & > h6 {
         margin:0;
         padding:0;
         opacity: 0.6;

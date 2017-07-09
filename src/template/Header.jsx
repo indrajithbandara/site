@@ -25,7 +25,8 @@ const Component = Style.header`
 
     background-color: tomato;
 
-    > h1, > ul {
+    & > h1,
+    & > ul {
         margin:0;
         padding:0;
 
@@ -37,13 +38,13 @@ const Component = Style.header`
         }
     }
 
-    > h1 {
+    & > h1 {
         letter-spacing: -0.03em;
         font-family: var(--fontHead);
         font-weight:normal;
     }
 
-    > ul {
+    & > ul {
         list-style:none;
         display:flex;
         flex-direction:row;
