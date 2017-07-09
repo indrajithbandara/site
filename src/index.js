@@ -11,26 +11,31 @@ import {
     BrowserRouter as Router
 } from 'react-router-dom';
 
+// Style management
+import { ThemeProvider } from 'styled-components';
+import Theme from './theme';
+
 // Template parts
 import Header from './template/Header';
 import Footer from './template/Footer';
 
 // Routes
 import Home from './routes/Home';
-import Todo from './components/Todo';
+
 
 // Render the application
 ReactDOM.render(
-    <Router>
-        <main>
-            <Header/>
-            <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route path='/todo' component={Todo}/>
-            </Switch>
-            <Footer/>
-        </main>
-    </Router>,
+    <ThemeProvider theme={Theme}>
+        <Router>
+            <main>
+                <Header/>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                </Switch>
+                <Footer/>
+            </main>
+        </Router>
+    </ThemeProvider>,
     document.getElementById('root')
 );
 
