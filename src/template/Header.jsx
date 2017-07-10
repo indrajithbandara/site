@@ -22,8 +22,7 @@ const Component = Style.header`
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--spaceH);
-
-    background-color: tomato;
+    border-bottom: 1px dotted var(--colorFG-lighter);
 
     & > h1,
     & > ul {

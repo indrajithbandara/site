@@ -2,6 +2,7 @@
 {
     "fontBody": "\"Hind\", sans-serif",
     "fontHead": "\"Rancho\", cursive",
+    "portrait00": "tomato",
     "colorFG": "#333",
     "colorBG": "#EEE"
 }
