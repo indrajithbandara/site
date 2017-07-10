@@ -1,21 +1,6 @@
 import React from 'react';
 import Style from 'styled-components';
 
-const Component = Style.footer`
-    border-top: 1px solid;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-
-    & > h6 {
-        margin:0;
-        padding:0;
-        opacity: 0.6;
-    }
-`;
-
 export default class Footer extends React.Component {
     render = () => <Component>
         <h6>
@@ -25,3 +10,19 @@ export default class Footer extends React.Component {
         </h6>
     </Component>
 }
+
+const Component = Style.footer`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px dotted var(--colorFG-lighter);
+
+    & > h6 {
+        margin w|:0;
+        padding:0;
+        font-weight:normal;
+        color: var(--colorFG-lighter);
+    }
+`;
