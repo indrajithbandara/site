@@ -34,7 +34,7 @@ const themeColors = theme
                 {sufix:'est', mult:0.25}
             ].map(({sufix, mult}) => ({
                 name:`${name}${prefix}${sufix}`,
-                color: operator.call(operator, mult, color)
+                color: operator.call(operator, 1-mult, color)
             }))
         )
         .reduce((acc, cur) => acc.concat(cur), [])
