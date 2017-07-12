@@ -29,14 +29,13 @@ import Home from './routes/Home';
 // Layout template
 Style`
     app {
-        height: 100vh;
-        width: 100vw;
-        display:grid;
+        display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 3rem 1fr 2rem;
-        grid-template-areas: "header" "content" "footer";
-        justify-items: stretch;
-        align-items: stretch;
+        grid-template-rows: auto auto 2rem;
+        grid-template-areas:
+            "header"
+            "content"
+            "footer";
     }
 `
 // Render the application

@@ -55,6 +55,11 @@ const global = Style`
         font-family: var(--fontBody);
         background-color: var(--colorBG);
         color: var(--colorFG);
+        height: 100%;
+    }
+
+    body {
+        height: inherit;
     }
 `;
 
