@@ -53,8 +53,8 @@ const global = Style`
 
     html {
         font-family: var(--fontBody);
-        background-color: var(--colorBG);
-        color: var(--colorFG);
+        background-color: var(--colorBg);
+        color: var(--colorFg);
         height: 100%;
     }
 

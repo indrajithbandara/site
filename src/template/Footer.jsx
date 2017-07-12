@@ -12,17 +12,19 @@ export default class Footer extends React.Component {
 }
 
 const Component = Style.footer`
+    --local-color: var(--colorFg-lighter);
+
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    border-top: 1px dotted var(--colorFG-lighter);
+    border-top: 1px dotted var(--local-color);
 
     & > h6 {
-        margin w|:0;
+        margin 0;
         padding:0;
         font-weight:normal;
-        color: var(--colorFG-lighter);
+        color: var(--local-color);
     }
 `;

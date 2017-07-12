@@ -44,7 +44,6 @@ const Component = Style.header`
         }
 
         & li {
-            margin-left: var(--spaceH);
             font-weight: lighter;
             text-transform: uppercase;
             font-size: 0.8rem;
@@ -57,7 +56,11 @@ const Component = Style.header`
     }
 
     /** Small devices **/
-    @media screen and (max-width: 414px){
+    @media screen and (max-width: ${prop => prop.theme.sizeScreenSmall}){
+        --local-sizeInput: 2rem;
+        --local-sizeBarHeight: 5px;
+        --local-sizeBarSpace: 3px;
+
         grid-template-columns: 1fr auto;
         grid-template-rows: 1fr;
 
@@ -75,15 +78,15 @@ const Component = Style.header`
             user-select: none; /* Disables text selection */
             display: grid;
             grid-template-rows: 1fr;
-            grid-template-columns: 2rem auto;
+            grid-template-columns: var(--local-sizeInput) auto;
             grid-template-areas: "input menu";
-            grid-column-gap: 0.5rem;
+            grid-column-gap: calc(var(--sizeGapCol) / 2);
             align-items: center;
 
             & input {
                 z-index: 1;
                 -webkit-touch-callout: none; /* Fix Safari showing on touch */
-                height: 2rem;
+                height: var(--local-sizeInput);
                 opacity:0;
                 grid-area: input;
                 cursor: pointer;
@@ -97,20 +100,22 @@ const Component = Style.header`
                     z-index: 3;
                     display:block;
                     position: relative;
-                    background-color: var(--colorFG);
-                    height: 5px;
-                    border-radius: 5px;
+                    background-color: var(--colorFg);
+                    height: var(--local-sizeBarHeight);
+                    border-radius: var(--local-sizeBarHeight);
                     grid-area: input;
                     content: '';
                     transition: all 0.5s ease;
                 }
 
                 &:before {
-                    top: -8px;
+                    top: calc(
+                        -1 * calc(var(--local-sizeBarHeight) + var(--local-sizeBarSpace))
+                    )
                 }
 
                 &:after {
-                    top: 3px;
+                    top: var(--local-sizeBarSpace);
                 }
             }
 
@@ -123,8 +128,8 @@ const Component = Style.header`
                 transition: margin-top 0.33s ease, margin-right 0.33s ease;
 
                 a {
-                    padding-right: 1rem;
-                    line-height: 2rem;
+                    padding-right: var(--sizeGapCol);
+                    line-height: var(--local-sizeInput);
                 }
             }
 
@@ -134,7 +139,7 @@ const Component = Style.header`
                     background-color: transparent;
 
                     &:before, &:after {
-                        background-color: var(--colorFG-lighter)
+                        background-color: var(--colorFg-lighter)
                     }
                     &:before {
                         transform: rotate(45deg);
@@ -142,7 +147,7 @@ const Component = Style.header`
                     }
                     &:after {
                         transform: rotate(-45deg);
-                        top:-5px;
+                        top: calc(-1 * var(--local-sizeBarHeight));
                     }
                 }
 

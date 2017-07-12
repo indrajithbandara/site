@@ -2,7 +2,10 @@
 {
     "fontBody": "\"Hind\", sans-serif",
     "fontHead": "\"Rancho\", cursive",
-    "portrait00": "tomato",
-    "colorFG": "#333",
-    "colorBG": "#EEE"
+    "colorFg": "#333",
+    "colorBg": "#EEE",
+    "colorCover": "tomato",
+    "sizeScreenSmall": "414px",
+    "sizeGapCol": "1rem",
+    "sizeGapRow": "0.8rem"
 }
