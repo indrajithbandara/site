@@ -4,7 +4,9 @@
     "fontHead": "\"Rancho\", cursive",
     "colorFg": "#333",
     "colorBg": "#EEE",
-    "colorCover": "tomato",
+    "colorHome00": "lightsalmon",
+    "colorHome01": "lightskyblue",
+    "colorHome02": "lightgreen",
     "sizeScreenSmall": "414px",
     "sizeGapCol": "1rem",
     "sizeGapRow": "0.8rem"
