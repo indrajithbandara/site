@@ -17,6 +17,39 @@ export default class Home extends React.Component {
                     <span> at </span>
                     <a href="https://technisys.com">Technisys</a>
                 </p>
+                <ul>
+                    <li>
+                        <a href="#"><span className="icon-facebook2"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-instagram"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-spotify"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-twitter"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-youtube"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-github"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-npm"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-linkedin"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-lastfm2"/></a>
+                    </li>
+                    <li>
+                        <a href="#"><span className="icon-pinterest"/></a>
+                    </li>
+                </ul>
+
             </article>
         </figure>
         <aside>
@@ -38,18 +71,11 @@ export default class Home extends React.Component {
 }
 
 // setup the color palette
-let colors = Object
+const colors = Object
     .keys(Theme)
     .filter(key => key.indexOf('colorHome') === 0)
     .map(key => ({ key, val: Theme[key] }))
-    .sort((a, b) => a.key < b.key? -1 : (a.key > b.key? 1 : 0));
-colors = colors
-    // repeat the colors in reverse order so the transition loops infinitely
-    .concat(colors
-        .slice()
-        .reverse()
-        .slice(1) // remove the first element (it would be repeated)
-    )
+    .sort((a, b) => a.key < b.key? -1 : (a.key > b.key? 1 : 0))
     // returns an array of strings ready to be replaced with a css property
     .reduce((result, cur, i, arr) => result.concat(
         `${ i * 100 / (arr.length-1) }% { %%: var(--${cur.key}); }`
@@ -65,8 +91,32 @@ const keyframesFg = Keyframes`${colors
     .join('\n')
 }`;
 
+const keyframesScroll = Keyframes`
+    0% {}
+    5%,13% {bottom: 0%; color: gray; }
+    15% {bottom: 10%; color:black; }
+`;
+
 const Component = Style.section`
     display:grid;
+    &:before {
+        content: 'Scroll down';
+        display:block;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-family: var(--fontHead);
+        font-size: 2rem;
+        font-style: italic;
+        color: var(--colorBg);
+        mix-blend-mode: color-dodge;
+        bottom: -1em;
+        color: black;
+        opacity:0.66;
+        animation: ${keyframesScroll} 15s ease-in 6s infinite normal;
+    }
+
+    --local-animation: 30s linear 0s infinite alternate;
 
     & > figure {
         display:block;
@@ -77,7 +127,7 @@ const Component = Style.section`
         background-position-y: 100%;
         background-blend-mode: multiply;
         background-image: url('hector-menendez.gif');
-        animation: ${keyframesBg} 30s linear infinite;
+        animation: ${keyframesBg} var(--local-animation);
 
         /**
          * TODO: find a way to correctly infer the height of the header
@@ -86,14 +136,14 @@ const Component = Style.section`
         min-height: calc(100vh - 2.55rem);
 
         article {
-            --local-sizeArticle: 66vw;
+            --local-sizeArticle: 75vw;
             position:absolute;
             text-align: center;
             width: var(--local-sizeArticle);
             left:50%;
             margin-left: calc(var(--local-sizeArticle) / -2);
             bottom: 30%;
-            text-shadow: -1px -1px 0px rgba(0,0,0, 0.5);
+            font-size: 1.1rem;
 
             & p,
             & h4 {
@@ -103,24 +153,66 @@ const Component = Style.section`
                 font-weight: normal;
                 font-style: normal;
                 white-space: nowrap;
+                text-shadow: -1px -1px 0px rgba(0,0,0, 0.5);
             }
 
             & h4 {
                 font-size: 1.25rem;
             }
 
-            & strong {
-                animation: ${keyframesFg} 30s linear infinite;
-            }
+            & p {
 
-            & a {
-                color:inherit;
-                text-decoration: none;
+                & strong {
+                    animation: ${keyframesFg} var(--local-animation);
+                    animation-direction: alternate-reverse;
+                }
 
-                &:hover {
-                    text-decoration: underline;
+                & a {
+                    color:inherit;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
+
+            & ul {
+                display: flex;
+                margin: 0.5rem 0 0 0;
+                padding: 0;
+                list-style: none;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                align-items: center;
+
+                & li {
+                    padding: 0;
+                    margin: 0;
+                }
+
+                & a {
+                    display:block;
+                    height: 1em;
+                    line-height: 1em;
+                    text-decoration: none;
+                    animation: ${keyframesFg} var(--local-animation);
+                    animation-direction: alternate-reverse;
+
+                    span {
+                        color: inherit;
+                    }
+
+                    &:hover span:before {
+                        color: var(--colorBg);
+                        text-shadow: 0px 0px 5px var(--colorBg-faint);
+                    }
+                }
+
+            }
+
+
 
         }
     }

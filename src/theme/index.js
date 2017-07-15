@@ -7,6 +7,8 @@ import {
     transparentize as Faint
 } from 'polished';
 
+import './icons.css';
+
 // Convert theme into an iterable array
 const theme = Object
     .keys(Theme)

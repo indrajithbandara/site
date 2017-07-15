@@ -5,8 +5,8 @@
     "colorFg": "#333",
     "colorBg": "#EEE",
     "colorHome00": "lightsalmon",
-    "colorHome01": "lightskyblue",
-    "colorHome02": "lightgreen",
+    "colorHome01": "lightgreen",
+    "colorHome02": "lightskyblue",
     "sizeScreenSmall": "414px",
     "sizeGapCol": "1rem",
     "sizeGapRow": "0.8rem"
