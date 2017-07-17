@@ -1,103 +1,31 @@
-import React from 'react';
 import Style, {keyframes as Keyframes} from 'styled-components';
-import Theme from '../theme';
+import Theme from '../../theme';
 
-export default class Home extends React.Component {
-    render = () => <Component>
-        <figure>
-            <article>
-                <h4>Hola, I'm Hector,</h4>
-                <p>
-                    <span> a Mexican </span>
-                    <strong> software architect </strong>
-                </p>
-                <p>
-                    <span> working in </span>
-                    <strong> Mexico </strong>
-                    <span> at </span>
-                    <a href="https://technisys.com">Technisys</a>
-                </p>
-                <ul>
-                    <li>
-                        <a href="#"><span className="icon-facebook2"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-instagram"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-spotify"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-twitter"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-youtube"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-github"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-npm"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-linkedin"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-lastfm2"/></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="icon-pinterest"/></a>
-                    </li>
-                </ul>
-
-            </article>
-        </figure>
-        <aside>
-            <h2>Hola Mundo</h2>
-            <ul>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-                <li> content </li>
-            </ul>
-        </aside>
-    </Component>
-}
-
-// setup the color palette
+// Template  for a keyframe transition.
+// returns an array of strings ready to be replaced with a css property
 const colors = Object
     .keys(Theme)
     .filter(key => key.indexOf('colorHome') === 0)
     .map(key => ({ key, val: Theme[key] }))
     .sort((a, b) => a.key < b.key? -1 : (a.key > b.key? 1 : 0))
-    // returns an array of strings ready to be replaced with a css property
     .reduce((result, cur, i, arr) => result.concat(
         `${ i * 100 / (arr.length-1) }% { %%: var(--${cur.key}); }`
     ), []);
 
+// keyframes definition for a background-color animation using template.
 const keyframesBg = Keyframes`${colors
     .map(rule => rule.replace('%%', 'background-color'))
     .join('\n')
 }`;
 
+// keyframes definition for a foreground-color animation using template.
 const keyframesFg = Keyframes`${colors
     .map(rule => rule.replace('%%', 'color'))
     .join('\n')
 }`;
 
-const keyframesScroll = Keyframes`
-    0% {}
-    5%,13% {bottom: 0%; color: gray; }
-    15% {bottom: 10%; color:black; }
-`;
 
-const Component = Style.section`
+export default Style.section`
     display:grid;
     &:before {
         content: 'Scroll down';
@@ -113,7 +41,11 @@ const Component = Style.section`
         bottom: -1em;
         color: black;
         opacity:0.66;
-        animation: ${keyframesScroll} 15s ease-in 6s infinite normal;
+        animation: ${Keyframes`
+            0% {}
+            5%,13% {bottom: 0%; color: gray; }
+            15% {bottom: 10%; color:black; }
+        `} 15s ease-in 6s infinite normal;
     }
 
     --local-animation: 30s linear 0s infinite alternate;
@@ -122,18 +54,13 @@ const Component = Style.section`
         display:block;
         margin:0;
         padding:0;
+        min-height: calc(100vh - 2.55rem); /* TODO: auto infer header height */
         background-size: 90%;
         background-position-x: 50%;
         background-position-y: 100%;
         background-blend-mode: multiply;
-        background-image: url('hector-menendez.gif');
+        /* background-image: url('hector-menendez.gif'); */
         animation: ${keyframesBg} var(--local-animation);
-
-        /**
-         * TODO: find a way to correctly infer the height of the header
-         *       in order to fill the whole screen vertically.
-         */
-        min-height: calc(100vh - 2.55rem);
 
         article {
             --local-sizeArticle: 75vw;
