@@ -1,5 +1,5 @@
 import Style, {keyframes as Keyframes} from 'styled-components';
-import Theme from '../../theme';
+import Theme from '../../../theme';
 
 // Template  for a keyframe transition.
 // returns an array of strings ready to be replaced with a css property
