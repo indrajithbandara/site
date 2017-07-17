@@ -1,9 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Style from './style';
+import StyledComponent from 'styled-components';
+
+import StyleAll from './style';
+import StyleSmall from './style-small';
+
+const Component = StyledComponent.header`
+    ${StyleAll}
+    @media screen and (max-width: ${prop => prop.theme.sizeScreenSmall}){${ StyleSmall} }
+`;
 
 export default class Header extends React.Component {
-    render = () => <Style>
+    render = () => <Component>
         <h1><Link to="/">Héctor Menéndez</Link></h1>
         <nav>
             <input id="header-nav__menu" type="checkbox" />
@@ -14,6 +22,6 @@ export default class Header extends React.Component {
                 <li><Link to="/contact">Contact</Link></li>
             </ul>
         </nav>
-    </Style>
+    </Component>
 }
 
