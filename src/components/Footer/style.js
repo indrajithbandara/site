@@ -1,17 +1,6 @@
-import React from 'react';
 import Style from 'styled-components';
 
-export default class Footer extends React.Component {
-    render = () => <Component>
-        <h6>
-            <strong>️© Héctor Adan Menéndez Rivera,</strong>
-            <span> 1981-{new Date().getFullYear()}.</span>
-            <span> All rights reserved</span>
-        </h6>
-    </Component>
-}
-
-const Component = Style.footer`
+export default Style.footer`
     --local-color: var(--colorFg-lighter);
 
     display: flex;
