@@ -7,7 +7,12 @@
     "colorHome00": "lightsalmon",
     "colorHome01": "lightgreen",
     "colorHome02": "lightskyblue",
-    "sizeScreenSmall": "414px",
     "sizeGapCol": "1rem",
-    "sizeGapRow": "0.8rem"
+    "sizeGapRow": "0.8rem",
+    "sizeMedia": [
+        {
+            "key": "small",
+            "val":{ "landscape": "480px", "portrait": "414px" }
+        }
+    ]
 }

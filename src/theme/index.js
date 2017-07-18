@@ -66,3 +66,39 @@ const global = Style`
 `;
 
 export default Theme;
+export {Theme};
+
+export const MediaQuery = (key, content) =>
+    [
+        { key: 'screen', val: 'screen' }
+    ]
+    .map(target =>
+        [
+            { key: 'landscape', val: '(orientation: landscape)'},
+            { key: 'portrait', val: '(orientation: portrait)'},
+        ]
+        .map(orientation => Theme.sizeMedia.map((size, i , sizes) => {
+            const curr = size.val[orientation.key];
+            const prev = !i? 0 : ([
+                // grab the number in expression and add one
+                parseInt(sizes[i-1].val[orientation.key], 10) + 1,
+                // grab the unit of current key
+                curr.match(/[a-z]+$/)[0]
+            ].join(''));
+            return ({
+                key: `${size.key}-${orientation.key}`,
+                val: `@media ${target.val} `+
+                    `and ${orientation.val} `+
+                    `and (min-width: ${prev}) ` +
+                    `and (max-width: ${curr}) {\n` +
+                        `%%\n` +
+                    `}\n`
+            });
+        }))
+        .reduce((acc, cur) => acc.concat(cur), [])
+    )
+    .reduce((acc, cur) => acc.concat(cur), [])
+    .filter(rule => rule.key === key)
+    .map(rule => rule.val.replace('%%', content))
+    .join('');
+

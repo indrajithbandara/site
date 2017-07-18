@@ -2,16 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import StyledComponent from 'styled-components';
 
-import StyleAll from './style';
-import StyleSmall from './style-small';
+import Style from './style';
 
-const Component = StyledComponent.header`${props => `
-    ${StyleAll({ props })}
-
-    @media screen and (max-width: ${props.theme.sizeScreenSmall}){
-        ${StyleSmall({ props })}
-    }
-`}`;
+const Component = StyledComponent.header`${props => Style({ props })}`;
 
 export default class Header extends React.Component {
     render = () => <Component>

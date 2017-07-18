@@ -1,3 +1,6 @@
+import { MediaQuery } from '../../theme';
+import Small from './style-small';
+
 export default ({ props }) => `
     display: grid;
 
@@ -34,4 +37,6 @@ export default ({ props }) => `
             text-decoration: underline;
         }
     }
+
+    ${MediaQuery('small-portrait', Small({ props }))}
 `;

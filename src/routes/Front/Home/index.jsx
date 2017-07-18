@@ -2,8 +2,7 @@ import React from 'react';
 import StyledComponents, {keyframes as Keyframes} from 'styled-components';
 
 import Theme from '../../../theme';
-import StyleAll from './style';
-import StyleSmall from './style-small';
+import Style from './style';
 
 // Template  for a keyframe transition.
 // returns an array of strings ready to be replaced with a css property
@@ -16,22 +15,17 @@ const colors = Object
         `${ i * 100 / (arr.length-1) }% { %%: var(--${cur.key}); }`
     ), []);
 
-const Component = StyledComponents.section`${props => `
-    ${StyleAll({
-        props,
-        animBg: Keyframes`${colors
-            .map(rule => rule.replace('%%', 'background-color'))
-            .join('\n')
-        }`,
-        animFg: Keyframes`${colors
-            .map(rule => rule.replace('%%', 'color'))
-            .join('\n')
-        }`
-    })}
-    @media screen and (max-width: ${props.theme.sizeScreenSmall}){
-        ${StyleSmall({ props })}
-    }
-`}`;
+const Component = StyledComponents.section`${props => Style({
+    props,
+    animBg: Keyframes`${colors
+        .map(rule => rule.replace('%%', 'background-color'))
+        .join('\n')
+    }`,
+    animFg: Keyframes`${colors
+        .map(rule => rule.replace('%%', 'color'))
+        .join('\n')
+    }`
+})}`;
 
 export default () => <Component>
     <figure>
