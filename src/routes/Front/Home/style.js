@@ -1,31 +1,8 @@
-import Style, {keyframes as Keyframes} from 'styled-components';
-import Theme from '../../../theme';
+import { keyframes as Keyframes } from 'styled-components';
 
-// Template  for a keyframe transition.
-// returns an array of strings ready to be replaced with a css property
-const colors = Object
-    .keys(Theme)
-    .filter(key => key.indexOf('colorHome') === 0)
-    .map(key => ({ key, val: Theme[key] }))
-    .sort((a, b) => a.key < b.key? -1 : (a.key > b.key? 1 : 0))
-    .reduce((result, cur, i, arr) => result.concat(
-        `${ i * 100 / (arr.length-1) }% { %%: var(--${cur.key}); }`
-    ), []);
+export default ({ props, animBg, animFg }) => `
+    --local-animation: 30s linear 0s infinite alternate;
 
-// keyframes definition for a background-color animation using template.
-const keyframesBg = Keyframes`${colors
-    .map(rule => rule.replace('%%', 'background-color'))
-    .join('\n')
-}`;
-
-// keyframes definition for a foreground-color animation using template.
-const keyframesFg = Keyframes`${colors
-    .map(rule => rule.replace('%%', 'color'))
-    .join('\n')
-}`;
-
-
-export default Style.section`
     display:grid;
     &:before {
         content: 'Scroll down';
@@ -48,8 +25,6 @@ export default Style.section`
         `} 15s ease-in 6s infinite normal;
     }
 
-    --local-animation: 30s linear 0s infinite alternate;
-
     & > figure {
         display:block;
         margin:0;
@@ -59,8 +34,8 @@ export default Style.section`
         background-position-x: 50%;
         background-position-y: 100%;
         background-blend-mode: multiply;
-        /* background-image: url('hector-menendez.gif'); */
-        animation: ${keyframesBg} var(--local-animation);
+        background-image: url('hector-menendez.gif');
+        animation: ${animBg} var(--local-animation);
 
         article {
             --local-sizeArticle: 75vw;
@@ -90,7 +65,7 @@ export default Style.section`
             & p {
 
                 & strong {
-                    animation: ${keyframesFg} var(--local-animation);
+                    animation: ${animFg} var(--local-animation);
                     animation-direction: alternate-reverse;
                 }
 
@@ -124,7 +99,7 @@ export default Style.section`
                     height: 1em;
                     line-height: 1em;
                     text-decoration: none;
-                    animation: ${keyframesFg} var(--local-animation);
+                    animation: ${animFg} var(--local-animation);
                     animation-direction: alternate-reverse;
 
                     span {
@@ -148,11 +123,4 @@ export default Style.section`
         background-color: var(--colorBG-lighter);
         padding: 1em;
     }
-
-    /** Small devices **/
-    @media screen and (max-width: ${prop => prop.theme.sizeScreenSmall}){
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-    }
-
 `;

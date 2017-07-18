@@ -1,7 +1,36 @@
 import React from 'react';
-import Style from './style';
+import StyledComponents, {keyframes as Keyframes} from 'styled-components';
 
-export default () => <Style>
+import Theme from '../../../theme';
+import StyleAll from './style';
+import StyleSmall from './style-small';
+
+// Template  for a keyframe transition.
+// returns an array of strings ready to be replaced with a css property
+const colors = Object
+    .keys(Theme)
+    .filter(key => key.indexOf('colorHome') === 0)
+    .map(key => ({ key, val: Theme[key] }))
+    .sort((a, b) => a.key < b.key? -1 : (a.key > b.key? 1 : 0))
+    .reduce((result, cur, i, arr) => result.concat(
+        `${ i * 100 / (arr.length-1) }% { %%: var(--${cur.key}); }`
+    ), []);
+
+const Component = StyledComponents.section`${props => `
+    ${StyleAll({
+        props,
+        animBg: Keyframes`${colors
+            .map(rule => rule.replace('%%', 'background-color'))
+            .join('\n')
+        }`,
+        animFg: Keyframes`${colors
+            .map(rule => rule.replace('%%', 'color'))
+            .join('\n')
+        }`
+    })}
+    ${StyleSmall({props})}
+`}`;
+export default () => <Component>
     <figure>
         <article>
             <h4>Hola, I'm Hector,</h4>
@@ -65,4 +94,4 @@ export default () => <Style>
             <li> content </li>
         </ul>
     </aside>
-</Style>;
+</Component>;
