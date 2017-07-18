@@ -1,4 +1,4 @@
-export default `
+export default ({ props }) => `
     display: grid;
 
     & a {

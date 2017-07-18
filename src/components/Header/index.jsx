@@ -5,10 +5,13 @@ import StyledComponent from 'styled-components';
 import StyleAll from './style';
 import StyleSmall from './style-small';
 
-const Component = StyledComponent.header`
-    ${StyleAll}
-    @media screen and (max-width: ${prop => prop.theme.sizeScreenSmall}){${ StyleSmall} }
-`;
+const Component = StyledComponent.header`${props => `
+    ${StyleAll({ props })}
+
+    @media screen and (max-width: ${props.theme.sizeScreenSmall}){
+        ${StyleSmall({ props })}
+    }
+`}`;
 
 export default class Header extends React.Component {
     render = () => <Component>

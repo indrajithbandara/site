@@ -1,4 +1,4 @@
-export default `
+export default ({ props }) => `
     --local-sizeInput: 2rem;
     --local-sizeBarHeight: 5px;
     --local-sizeBarSpace: 3px;
