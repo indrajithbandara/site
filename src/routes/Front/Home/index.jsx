@@ -28,8 +28,11 @@ const Component = StyledComponents.section`${props => `
             .join('\n')
         }`
     })}
-    ${StyleSmall({props})}
+    @media screen and (max-width: ${props.theme.sizeScreenSmall}){
+        ${StyleSmall({ props })}
+    }
 `}`;
+
 export default () => <Component>
     <figure>
         <article>
