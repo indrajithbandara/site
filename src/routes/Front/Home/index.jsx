@@ -43,34 +43,34 @@ export default () => <Component>
             </p>
             <ul>
                 <li>
-                    <a href="#"><span className="icon-facebook2"/></a>
+                    <a href="#tmp"><span className="icon-facebook2"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-instagram"/></a>
+                    <a href="#tmp"><span className="icon-instagram"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-spotify"/></a>
+                    <a href="#tmp"><span className="icon-spotify"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-twitter"/></a>
+                    <a href="#tmp"><span className="icon-twitter"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-youtube"/></a>
+                    <a href="#tmp"><span className="icon-youtube"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-github"/></a>
+                    <a href="#tmp"><span className="icon-github"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-npm"/></a>
+                    <a href="#tmp"><span className="icon-npm"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-linkedin"/></a>
+                    <a href="#tmp"><span className="icon-linkedin"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-lastfm2"/></a>
+                    <a href="#tmp"><span className="icon-lastfm2"/></a>
                 </li>
                 <li>
-                    <a href="#"><span className="icon-pinterest"/></a>
+                    <a href="#tmp"><span className="icon-pinterest"/></a>
                 </li>
             </ul>
 

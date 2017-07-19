@@ -1,7 +1,6 @@
 import Theme from './default.json';
 import { injectGlobal as Style } from 'styled-components';
 import {
-    rgba as Rgba,
     lighten as Lighten,
     darken as Darken,
     transparentize as Faint
@@ -47,8 +46,8 @@ const themeVars = theme
     .concat(themeColors)
     .reduce((str, cur) => [str, `--${cur.name}: ${cur.color};`].join('\n'), '');
 
-
-const global = Style`
+// I'm doing the export only to avoid the linter warning.
+export const CSS = Style`
     :root {
         ${themeVars}
     }
