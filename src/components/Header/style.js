@@ -1,6 +1,11 @@
 import { MediaQuery } from '../../theme';
 import Small from './style-small';
 
+const queries = [
+    { size:'mob-port', type:'screen', side:'portrait'},
+    { size:'mob-land', type:'screen', side:'landscape'}
+];
+
 export default ({ props }) => `
     display: grid;
 
@@ -38,5 +43,5 @@ export default ({ props }) => `
         }
     }
 
-    ${MediaQuery('small-portrait', Small({ props }))}
+    ${MediaQuery(queries, Small({ props }))}
 `;

@@ -14,5 +14,13 @@
             "key": "small",
             "val":{ "landscape": "480px", "portrait": "414px" }
         }
+    ],
+    "media":[
+        { "type": "size", "key": "mob-port", "val": "(min-width:0) and (max-width:414px)" },
+        { "type": "size", "key": "mob-land", "val": "(min-width:0) and (max-width:736px)" },
+        { "type": "type", "key": "screen", "val":"only screen" },
+        { "type": "type", "key": "else", "val":"not screen" },
+        { "type": "side", "key": "land", "val":"(orientation: landscape)"},
+        { "type": "side", "key": "port", "val": "(orientation: portrait)"}
     ]
 }
