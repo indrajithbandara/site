@@ -1,0 +1,16 @@
+{
+    "extends": "@gik/node",
+    "rules": {
+        "import/no-dynamic-require": "off",
+        "import/no-named-as-default-member": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": [
+                    "./out",
+                ]
+            }
+        }
+    }
+}

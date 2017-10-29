@@ -1,15 +1,18 @@
 {
     "name": "@etor/site",
-    "version": "0.0.2",
-    "description": "Tets",
-    "author": "",
+    "version": "0.0.3",
+    "description": "My personal website.",
     "license": "MIT",
-    "scripts": {
-        "precommit": "gik-npm version patch"
-    },
+    "contributors": [
+        "Héctor Menéndez <hector@gik.mx>"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/hectormenendez/site"
+    },
+    "scripts": {
+        "back:commit": "cd back && npm run verify -s && cd -",
+        "precommit": "npm run back:commit -s && gik-npm version patch"
     },
     "dependencies": {},
     "devDependencies": {
