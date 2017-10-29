@@ -1,0 +1,18 @@
+{
+    "name": "@etor/site",
+    "version": "0.0.2",
+    "description": "Tets",
+    "author": "",
+    "license": "MIT",
+    "scripts": {
+        "precommit": "gik-npm version patch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hectormenendez/site"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@gik/npm": "^0.1.6"
+    }
+}
