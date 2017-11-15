@@ -3,6 +3,4 @@ node_modules
 .git
 *.log
 .DS_*
-
-/back/out
-/front/out
+coverage

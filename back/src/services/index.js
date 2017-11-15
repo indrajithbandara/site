@@ -7,7 +7,8 @@ export default $
     .fromDirRead(__dirname)
     .filter(node => node.stat.isDirectory())
     .map(({ path }) => require(path).default) // eslint-disable-line global-require
-    .map(service => function wrapService() {
+    .map(service => function wrappedService() {
         this.configure(service);
-        Log.debug('Registered service %s', service.name);
+        Log.info('Registered service %s', service.name);
+        return this;
     });

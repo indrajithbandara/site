@@ -11,10 +11,11 @@
         "url": "https://github.com/hectormenendez/site"
     },
     "scripts": {
-        "back:commit": "cd back && npm run verify -s && cd -",
-        "precommit": "npm run back:commit -s && npm --no-git-tag-version version patch"
+        "precommit:back": "npm --prefix ./back run precommit",
+        "precommit": "npm run precommit:back -s && npm --no-git-tag-version version patch"
     },
     "devDependencies": {
         "husky": "^0.14.3"
-    }
+    },
+    "dependencies": {}
 }

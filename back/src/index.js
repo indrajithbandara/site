@@ -17,10 +17,12 @@ import Services$ from 'services';
  * @namespace Backend
  * @description The API that serves content to the frontend.
  */
-const feathers = Feathers();
+const feathers$ = $
+    .of(Feathers())
+    .share();
 
 // ------------------------------------------------------------------- Basic configuration
-const feathersBasic$ = $.of(feathers
+const feathersBase$ = feathers$.map(feathers => feathers
     // set configuration to server
     .configure(() => Object
         .keys(Config)
@@ -39,36 +41,42 @@ const feathersBasic$ = $.of(feathers
 );
 
 // ------------------------------------------------------- Plugins, Providers & Middleware
-const feathersProviders$ = $.of(feathers
+const feathersProviders$ = feathers$.map(feathers => feathers
     .configure(FeathersHooks()),
-    // .configure(FeathersSocket()),
 );
 
-const feathersServices$ = Services$
-    .map(servicesWrapper => feathers.configure(servicesWrapper));
+const feathersServices$ = feathers$
+    .concatMap(feathers => Services$.map(wrappedService => feathers
+        .configure(wrappedService)),
+    )
+    .toArray();
 
 // if nothing else matches, this middleware will send a 404.
-const feathersFallback$ = $.of(feathers
+const feathersFallback$ = feathers$.map(feathers => feathers
     .use(FeathersNotFound())
     .use(FeathersHandler()),
 );
 
 // ------------------------------------------------------------------------ Initialization
-const port = process.env.PORT || feathers.get('server.port');
-const host = process.env.HOST || feathers.get('server.host');
 const onError = error => Log.error(error);
-const onReady = () => Log.info('Listening on %s:%d', host, port);
 $
     .combineLatest(
-        feathersBasic$,
+        feathersBase$,
         feathersProviders$,
         feathersServices$,
         feathersFallback$,
     )
+    .switchMapTo(feathers$)
     .subscribe(
-        () => feathers
-            .listen(port, host)
-            .on('listening', onReady)
+        feathers => feathers
+            .set('server.port', process.env.PORT || feathers.get('server.port'))
+            .set('server.host', process.env.HOST || feathers.get('server.host'))
+            .listen(feathers.get('server.port'), feathers.get('server.host'))
+            .on('listening', () => Log.info(
+                'listening on %s:%d',
+                feathers.get('server.host'),
+                feathers.get('server.port'),
+            ))
             .on('unhandledRejection', onError),
         onError,
     );
