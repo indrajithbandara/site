@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.back",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "The backend for my personal website",
     "license": "MIT",
     "private": true,
@@ -15,7 +15,6 @@
         "type": "git",
         "url": "https://github.com/hectormenendez/site"
     },
-    "main": "src/index.js",
     "os": [
         "linux",
         "darwin"
@@ -32,31 +31,32 @@
         "data": "../data",
         "static": "./static"
     },
+    "main": "out/index.js",
     "scripts": {
-        "ver": "gik-npm version",
         "test": "gik-npm lint test && gik-npm test",
         "build": "gik-npm lint src && gik-npm build",
         "verify": "npm run build -s && npm test -s",
         "start": "NODE_PATH=$npm_package_directories_out node $npm_package_directories_out",
-        "watch": "gik-npm start 'npm run build -s && npm start'"
+        "watch": "gik-npm start 'npm run build -s && npm start'",
+        "precommit": "npm run verify -s && gik-npm version patch"
     },
     "dependencies": {
-        "@gik/tools-checker": "0.0.8",
-        "@gik/tools-mapper": "0.0.3",
-        "@gik/tools-populator": "0.0.2",
-        "@gik/tools-streamer": "0.0.9",
+        "@gik/tools-checker": "0.0.11",
+        "@gik/tools-mapper": "0.0.7",
+        "@gik/tools-populator": "0.0.5",
+        "@gik/tools-streamer": "0.0.11",
         "body-parser": "^1.18.2",
         "compression": "^1.7.1",
         "cors": "^2.8.4",
         "feathers": "^2.2.3",
-        "feathers-hooks": "^2.1.1",
+        "feathers-hooks": "^2.1.2",
         "feathers-nedb": "^2.7.0",
         "helmet": "^3.9.0",
         "nedb": "^1.8.0",
         "pkg-dir": "^2.0.0"
     },
     "devDependencies": {
-        "@gik/eslint-config-node": "0.0.3",
-        "@gik/npm": "^0.1.6"
+        "@gik/eslint-config-node": "0.0.5",
+        "@gik/npm": "^0.1.12"
     }
 }

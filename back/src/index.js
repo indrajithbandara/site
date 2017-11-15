@@ -15,7 +15,7 @@ import Services$ from 'services';
 
 /**
  * @namespace Backend
- * @description The API that serves content to the forntend.
+ * @description The API that serves content to the frontend.
  */
 const feathers = Feathers();
 
