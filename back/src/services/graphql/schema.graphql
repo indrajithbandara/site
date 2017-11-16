@@ -1,0 +1,20 @@
+type Taco {
+    _id: String
+    meat: String
+    cheese: String
+    salsa: String
+}
+
+type Query {
+    allTacos: [Taco]
+    tacos(meat: String!): [Taco]
+    taco(_id: String!): Taco
+}
+
+type Mutation {
+    createTaco (
+        meat: String!
+        cheese: String
+        salsa: String
+    ): Taco
+}

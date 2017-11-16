@@ -1,13 +1,15 @@
 // NPM modules
-import FeathersNeDB from 'feathers-nedb';
+import ServiceNeDB from 'feathers-nedb';
 // Local modules
 import ModelNeDB from 'models/nedb';
 import Hooks from './hooks';
 
-export default function ServiceSocket() {
-    const name = 'socket';
+export default function Service(name) {
     // register the service
-    this.use(`/${name}`, FeathersNeDB({ name, Model: ModelNeDB(`${name}.db`) }));
+    this.use(`/${name}`, ServiceNeDB({
+        name,
+        Model: ModelNeDB(name),
+    }));
     // initialize the service
     const service = this.service(name);
     service.hooks(Hooks);
