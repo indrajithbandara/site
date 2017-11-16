@@ -9,9 +9,9 @@ import { path as Path } from 'config';
 
 export default function Model(name) {
     if (!Checker.is.string(name))
-        Thrower(['Expecting a model name, got %s', typeof name], 'NedbError');
+        Thrower(['Expecting a model name, got %s', typeof name], 'NeDBError');
     return new NeDB({
-        filename: PATH.join(Path.data, name),
+        filename: PATH.join(Path.data, `${name}.db`),
         autoload: true,
     });
 }

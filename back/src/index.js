@@ -1,7 +1,5 @@
 // NPM modules
 import Feathers from 'feathers';
-import FeathersHandler from 'feathers-errors/handler';
-import FeathersNotFound from 'feathers-errors/not-found';
 import FeathersHooks from 'feathers-hooks';
 import Cors from 'cors';
 import Helmet from 'helmet';
@@ -45,17 +43,16 @@ const feathersProviders$ = feathers$.map(feathers => feathers
     .configure(FeathersHooks()),
 );
 
-const feathersServices$ = feathers$
-    .concatMap(feathers => Services$.map(wrappedService => feathers
-        .configure(wrappedService)),
-    )
-    .toArray();
-
-// if nothing else matches, this middleware will send a 404.
-const feathersFallback$ = feathers$.map(feathers => feathers
-    .use(FeathersNotFound())
-    .use(FeathersHandler()),
-);
+const feathersServices$ = $
+    .combineLatest(feathers$, Services$)
+    .map(([feathers, services]) => feathers
+        .get('services')
+        .map((name) => {
+            const service = services.filter(func => func.name === name).shift();
+            if (!service) throw new Error(`Invalid service "${name}", not found.`);
+            return feathers.configure(service);
+        }),
+    );
 
 // ------------------------------------------------------------------------ Initialization
 const onError = error => Log.error(error);
@@ -64,7 +61,7 @@ $
         feathersBase$,
         feathersProviders$,
         feathersServices$,
-        feathersFallback$,
+        // feathersFallback$,
     )
     .switchMapTo(feathers$)
     .subscribe(

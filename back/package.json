@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.back",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "The backend for my personal website",
     "license": "MIT",
     "private": true,
