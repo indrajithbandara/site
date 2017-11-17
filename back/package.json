@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.back",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "The backend for my personal website",
     "license": "MIT",
     "private": true,
@@ -42,7 +42,7 @@
     },
     "dependencies": {
         "@gik/tools-checker": "0.0.11",
-        "@gik/tools-logger": "0.0.8",
+        "@gik/tools-logger": "0.0.9",
         "@gik/tools-mapper": "0.0.7",
         "@gik/tools-populator": "0.0.5",
         "@gik/tools-streamer": "0.0.11",

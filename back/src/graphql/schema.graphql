@@ -14,21 +14,16 @@ type User {
 # ------------------------------------------------------------------------------
 
 type Query {
-
     tacos(meat: String, cheese: String, salsa: String): [Taco]
-
     taco(_id: String!): Taco
 
+    users: [User]
     user(email: String! password: String!): User
-
 }
 
 # ------------------------------------------------------------------------------
 
 type Mutation {
-
     tacoAdd (meat: String!, cheese: String!, salsa: String!): Taco
-
     userAdd (email: String!, password: String!): User
-
 }

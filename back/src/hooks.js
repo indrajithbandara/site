@@ -23,7 +23,7 @@ export default {
     },
 
     error: {
-        all: [LogHook()],
+        all: [LogHook('error')],
         find: [],
         get: [],
         create: [],

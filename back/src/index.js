@@ -10,11 +10,12 @@ import Compression from 'compression';
 import BodyParser from 'body-parser';
 import { $ } from '@gik/tools-streamer';
 // Local modules
-import Config from 'config';
-import Log from 'logger';
-import Hooks from 'hooks';
-import Auth$ from 'auth';
-import Services$ from 'services';
+import Config from './config';
+import Log from './logger';
+import Hooks from './hooks';
+import GraphQL from './graphql';
+import Auth$ from './auth';
+import Services$ from './services';
 
 /**
  * @namespace Backend
@@ -70,13 +71,16 @@ const feathersServices$ = $
     )
     .mapTo('Services');
 
+const feathersGraphQL$ = feathers$
+    .do(feathers => feathers.configure(GraphQL))
+    .mapTo('GraphQL');
 
 const feathersFallback$ = feathers$
     .do(feathers => feathers
         .use(FeathersErrorNotFound())
         .use(FeathersErrorHandler()),
     )
-    .mapTo('Fallback')
+    .mapTo('Fallback');
 
 
 const feathersHooks$ = feathers$
@@ -85,12 +89,14 @@ const feathersHooks$ = feathers$
 
 // ------------------------------------------------------------------------ Initialization
 const onError = error => Log.error(error);
+
 $
     .concat(
         feathersBase$,
         feathersProviders$,
         feathersAuth$,
         feathersServices$,
+        feathersGraphQL$,
         feathersFallback$,
         feathersHooks$,
     )

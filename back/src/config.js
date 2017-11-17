@@ -32,6 +32,8 @@ path.app = path.out;
 delete path.src;
 delete path.out;
 
+export const env = process.env.NODE_ENV;
+
 /**
  * @memberof Backend.Configuration
  * @type Object
@@ -65,4 +67,5 @@ export default ToolMapper(ToolPopulator({
     ...raw,
     path,
     pkg,
+    env,
 }));
