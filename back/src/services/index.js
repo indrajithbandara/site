@@ -13,7 +13,7 @@ export default $
             throw new Error(`Invalid ${name} service function, got ${typeof service}`);
         function wrappedService() {
             this.configure(service.bind(this, name));
-            Log.info('Service registered: %s', name);
+            Log.info('Service %s registered.', name);
             return this;
         }
         // The function name will be the filename

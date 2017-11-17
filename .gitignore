@@ -4,3 +4,6 @@ node_modules
 *.log
 .DS_*
 coverage
+
+# backend authentication secret
+/config/back-auth.json

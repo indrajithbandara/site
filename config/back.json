@@ -3,7 +3,27 @@
         "host": "0.0.0.0",
         "port": 8000
     },
+    "auth": {
+        "path": "/auth",
+        "service": "users",
+        "local": {
+            "entity": "user",
+            "usernameField": "email",
+            "passwordField": "password"
+        },
+        "jwt": {
+            "header": {
+                "typ": "access"
+            },
+            "audience": "https://yourdomain.com",
+            "subject": "anonymous",
+            "issuer": "feathers",
+            "algorithm": "HS256",
+            "expiresIn": "1d"
+        }
+    },
     "services": [
+        "users",
         "tacos",
         "graphql"
     ]
