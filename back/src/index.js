@@ -1,4 +1,3 @@
-/* eslint-disable */
 // NPM modules
 import Feathers from 'feathers';
 import FeathersHooks from 'feathers-hooks';

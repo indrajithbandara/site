@@ -5,16 +5,30 @@ type Taco {
     salsa: String
 }
 
-type Query {
-    allTacos: [Taco]
-    tacos(meat: String!): [Taco]
-    taco(_id: String!): Taco
+type User {
+    _id: String!
+    email: String!
+    token: String
 }
 
+# ------------------------------------------------------------------------------
+
+type Query {
+
+    tacos(meat: String, cheese: String, salsa: String): [Taco]
+
+    taco(_id: String!): Taco
+
+    user(email: String! password: String!): User
+
+}
+
+# ------------------------------------------------------------------------------
+
 type Mutation {
-    createTaco (
-        meat: String!
-        cheese: String
-        salsa: String
-    ): Taco
+
+    tacoAdd (meat: String!, cheese: String!, salsa: String!): Taco
+
+    userAdd (email: String!, password: String!): User
+
 }
