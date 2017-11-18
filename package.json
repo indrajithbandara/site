@@ -1,6 +1,6 @@
 {
     "name": "@etor/site",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "My personal website.",
     "license": "MIT",
     "contributors": [
@@ -12,6 +12,7 @@
     },
     "scripts": {
         "precommit:back": "npm --prefix ./back run precommit && git add ./back/package*.json",
+        "precommit:front": "npm --prefix ./back run precommit && git add ./back/package*.json",
         "precommit": "npm run precommit:back -s && npm --no-git-tag-version version patch && git add ./package*.json"
     },
     "devDependencies": {

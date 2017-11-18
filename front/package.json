@@ -1,0 +1,45 @@
+{
+    "name": "@etor/site.front",
+    "version": "0.0.0",
+    "description": "The frontend for my personal website.",
+    "license": "MIT",
+    "private": true,
+    "keywords": [
+        "website",
+        "blog"
+    ],
+    "contributors": [
+        "Héctor Menéndez <hector@gik.mx>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hectormenendez/site"
+    },
+    "os": [
+        "linux",
+        "darwin"
+    ],
+    "engines": {
+        "node": "^6.11.0",
+        "npm": "^5.4.2"
+    },
+    "directories": {
+        "test": "__tests__",
+        "out": "./out",
+        "src": "./src",
+        "cfg": "../config",
+        "static": "./out/static"
+    },
+    "main": "./start",
+    "scripts": {
+        "test": "gik-npm lint test && gik-npm test",
+        "watch": "babel-node $npm_package_main",
+        "precommit": "gik-npm version patch --no-add"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/node": "^7.0.0-beta.32",
+        "@gik/eslint-config-react": "0.0.3",
+        "@gik/npm": "^0.1.13"
+    }
+}
