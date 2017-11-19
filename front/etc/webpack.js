@@ -78,7 +78,7 @@ export default ({ env, path }) => ({
                             // Extra functionality
                             plugins: [
                                 // Transform JSX whenever whenever pragma is found.
-                                ['transform-react-jsx', { pragma: 'React' }],
+                                ['transform-react-jsx', { pragma: 'React.createElement' }],
                                 'inline-import', // allows importing graphql files
                             ],
                         },
