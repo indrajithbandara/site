@@ -1,7 +1,7 @@
 import PATH from 'path';
 import WebpackHtml from 'html-webpack-plugin';
 
-export default ({ env, path, webpack }) => ({
+export default ({ env, path }) => ({
 
     // The target environment for the compilation
     target: 'web',
@@ -63,12 +63,23 @@ export default ({ env, path, webpack }) => ({
                     {
                         loader: 'babel-loader',
                         options: {
-                            // if a babelrc file is found on context, use its rules.
-                            babelrc: true,
+                            // Don't use the babelrc files found on folder
+                            // since they're use for transpiling webpack and npm.
+                            babelrc: false,
+                            presets: [
+                                'react',
+                                ['env', { // available from @gik/npm
+                                    targets: {
+                                        browsers: ['last 2 versions'],
+                                    },
+                                }],
+                                'stage-2', // available from @gik/npm
+                            ],
                             // Extra functionality
                             plugins: [
                                 // Transform JSX whenever whenever pragma is found.
-                                ['transform-react-jsx', { pragma: webpack.jsxPragma }],
+                                ['transform-react-jsx', { pragma: 'React' }],
+                                'inline-import', // allows importing graphql files
                             ],
                         },
                     },

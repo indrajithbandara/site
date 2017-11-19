@@ -1,5 +1,2 @@
 {
-    "webpack": {
-        "jsxPragma": "React"
-    }
 }
