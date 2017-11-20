@@ -1,6 +1,6 @@
 import Thrower from '@gik/tools-thrower';
 // Local
-import { env as Env } from 'config';
+import { Env } from 'config';
 import AuthClient from 'auth/client';
 
 const priv = Env !== 'production';

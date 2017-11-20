@@ -5,7 +5,7 @@ import NeDB from 'nedb';
 import Checker from '@gik/tools-checker';
 import Thrower from '@gik/tools-thrower';
 // local modules
-import { path as Path } from 'config';
+import { Path } from 'config';
 
 export default function Model(name) {
     if (!Checker.is.string(name))

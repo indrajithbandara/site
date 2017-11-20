@@ -4,7 +4,7 @@ import {
     graphiqlExpress as ExpressGuiQL,
 } from 'graphql-server-express';
 // Local
-import { raw as Config } from 'config';
+import { Raw as Config } from 'config';
 import Log from 'logger';
 import TypeDefs from './schema.graphql';
 import Resolvers from './schema';
