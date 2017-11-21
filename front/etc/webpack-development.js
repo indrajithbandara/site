@@ -1,6 +1,6 @@
-import Webpack from 'webpack';
+const Webpack = require('webpack');
 
-export default ({ devServer }) => ({
+module.exports = ({ devServer }) => ({
 
     // The style of source-mapping, this can greatly speed-up bundling.
     devtool: 'cheap-module-source-map',
@@ -29,9 +29,7 @@ export default ({ devServer }) => ({
         // Add module names to factory functions so they appear in the browser profiler
         new Webpack.NamedModulesPlugin(),
         // Enable sending hot updates
-        new Webpack.HotModuleReplacementPlugin(),
-        // Show a progressbar when transpiling
-        new Webpack.ProgressPlugin(),
+        new Webpack.HotModuleReplacementPlugin()
     ],
 
 });

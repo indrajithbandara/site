@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -30,28 +30,43 @@
         "etc": "./etc",
         "cfg": "../config"
     },
-    "main": "./start",
+    "@gik/npm": {
+        "webpack": {
+            "config": {
+                "path": "../config",
+                "name": ["common", "front"]
+            }
+        }
+    },
     "scripts": {
         "test": "gik-npm lint test && gik-npm test",
-        "watch": "babel-node $npm_package_main",
+        "build": "NODE_ENV=production gik-npm webpack etc",
+        "start": "gik-npm webpack etc",
         "precommit": "gik-npm version patch --no-add"
     },
-    "dependencies": {},
+    "dependencies": {
+        "apollo-cache-inmemory": "^1.1.1",
+        "apollo-client": "^2.0.3",
+        "apollo-link": "^1.0.3",
+        "apollo-link-http": "^1.2.0",
+        "apollo-link-ws": "^1.0.1",
+        "apollo-utilities": "^1.0.2",
+        "graphql": "^0.11.7",
+        "react": "^16.1.1",
+        "react-apollo": "^2.0.1",
+        "react-dom": "^16.1.1",
+        "react-router-dom": "^4.2.2",
+        "subscriptions-transport-ws": "^0.9.1"
+    },
     "devDependencies": {
-        "@babel/node": "^7.0.0-beta.32",
         "@gik/eslint-config-react": "0.0.3",
-        "@gik/npm": "^0.1.13",
-        "@gik/tools-configurator": "0.0.5",
-        "@gik/tools-logger": "0.0.9",
+        "@gik/npm": "^0.1.14-beta.0",
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-inline-import": "^2.0.6",
         "babel-plugin-transform-react-jsx": "^7.0.0-beta.3",
         "babel-preset-react": "^7.0.0-beta.3",
         "eslint-loader": "^1.9.0",
         "html-loader": "^0.5.1",
-        "html-webpack-plugin": "^2.30.1",
-        "webpack": "^3.8.1",
-        "webpack-dev-server": "^2.9.4",
-        "webpack-merge": "^4.1.1"
+        "html-webpack-plugin": "^2.30.1"
     }
 }

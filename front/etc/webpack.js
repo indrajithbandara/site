@@ -1,7 +1,8 @@
-import PATH from 'path';
-import WebpackHtml from 'html-webpack-plugin';
+const PATH = require('path');
+const Webpack = require('webpack');
+const WebpackHtml = require('html-webpack-plugin');
 
-export default ({ env, path }) => ({
+module.exports = ({ env, path }) => ({
 
     // The target environment for the compilation
     target: 'web',
@@ -96,6 +97,8 @@ export default ({ env, path }) => ({
     },
 
     plugins: [
+        // Show a progressbar when transpiling
+        new Webpack.ProgressPlugin(),
         // Outputs an html file based upon a template (specified on the html-loader)
         new WebpackHtml({
             // The filename to use for the generated html

@@ -1,4 +1,4 @@
-export default ({ path, devServer: { host, port } }) => ({
+module.exports = ({ path, devServer: { host, port } }) => ({
     host,
     port,
     // Don't show logs for the compilation on the browser
