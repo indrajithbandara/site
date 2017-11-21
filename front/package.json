@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.0",
+    "version": "0.0.4",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -41,6 +41,7 @@
         "@babel/node": "^7.0.0-beta.32",
         "@gik/eslint-config-react": "0.0.3",
         "@gik/npm": "^0.1.13",
+        "@gik/tools-configurator": "0.0.5",
         "@gik/tools-logger": "0.0.9",
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-inline-import": "^2.0.6",
