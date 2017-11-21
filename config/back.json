@@ -1,14 +1,19 @@
 {
     "server": {
-        "host": "0.0.0.0",
-        "port": 8000
+        "host": "${hosts.public}",
+        "port": "${ports.back}"
     },
     "services": [
         "users",
         "tacos"
     ],
+    "graphql": {
+        "host": "${hosts.public}",
+        "port": "${ports.socket}",
+        "path": "${endpoints.graphql}"
+    },
     "auth": {
-        "path": "/auth",
+        "path": "${endpoints.auth}",
         "service": "users",
         "local": {
             "entity": "user",
@@ -19,14 +24,9 @@
             "header": {
                 "typ": "access"
             },
-            "audience": "http://localhost",
             "subject": "anonymous",
             "issuer": "feathers",
-            "algorithm": "HS256",
-            "expiresIn": "1d"
+            "algorithm": "HS256"
         }
-    },
-    "graphql": {
-        "path": "/graphql"
     }
 }

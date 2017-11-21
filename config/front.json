@@ -1,2 +1,6 @@
 {
+    "api": {
+        "host": "${hosts.public}",
+        "port": "${ports.back}"
+    }
 }

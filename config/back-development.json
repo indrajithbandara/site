@@ -1,1 +1,8 @@
-{}
+{
+    "auth": {
+        "jwt": {
+            "audience": "http://localhost",
+            "expiresIn": "365d"
+        }
+    }
+}

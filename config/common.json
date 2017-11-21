@@ -1,2 +1,14 @@
 {
+    "hosts": {
+        "public": "0.0.0.0"
+    },
+    "ports": {
+        "back": 8080,
+        "socket": 8888,
+        "front": 8000
+    },
+    "endpoints": {
+        "graphql": "/graphql",
+        "auth": "/auth"
+    }
 }

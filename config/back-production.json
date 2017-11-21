@@ -1,1 +1,8 @@
-{}
+{
+    "auth": {
+        "jwt": {
+            "audience": "http://hectormenendez.com",
+            "expiresIn": "1d"
+        }
+    }
+}
