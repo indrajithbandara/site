@@ -1,16 +1,11 @@
 /* eslint-disable global-require */
-/* eslint-disable */
-
-// Native modules
 import PATH from 'path';
-// NPM moduless
 import ToolPopulator from '@gik/tools-populator';
 import ToolMapper from '@gik/tools-mapper';
-import { sync as PkgDir } from 'pkg-dir';
 import {
     Path as ConfiguratorPath,
     Env as ConfiguratorEnv,
-    Configurator
+    Configurator,
 } from '@gik/tools-configurator';
 
 // Expose available folders (removing src & out in favor of app)
@@ -23,10 +18,10 @@ delete Path.out;
 export const Env = ConfiguratorEnv;
 
 // The raw backend configuration.
-export const Raw = Configurator({ path: Path.cfg, name: 'back' });
+export const Back = Configurator({ path: Path.cfg, name: ['common', 'back'] });
 
 // The frontend configuration.
-export const Front = Configurator({ path: Path.cfg, name: 'front' });
+export const Front = Configurator({ path: Path.cfg, name: ['common', 'front'] });
 
 // Include the package configuration
 export const Package = require(PATH.join(Path.root, 'package.json'));
@@ -42,8 +37,9 @@ export const Package = require(PATH.join(Path.root, 'package.json'));
  * @property {Object} pkg
  */
 export default ToolMapper(ToolPopulator({
-    ...Raw,
+    ...Back,
     path: Path,
     package: Package,
     env: Env,
+    front: Front,
 }));

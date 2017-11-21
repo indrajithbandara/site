@@ -8,7 +8,7 @@ import DeepMerge from 'deepmerge';
 import Thrower from '@gik/tools-thrower';
 import { $ } from '@gik/tools-streamer';
 // Local
-import { Raw as Config, Path } from 'config';
+import { Back as Config, Path } from 'config';
 import Log from 'logger';
 
 const secret = PATH.join(Path.cfg, 'back-auth.json');
