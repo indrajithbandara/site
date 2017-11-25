@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -62,8 +62,8 @@
         "subscriptions-transport-ws": "^0.9.1"
     },
     "devDependencies": {
-        "@gik/eslint-config-react": "0.0.3",
-        "@gik/npm": "^0.1.14-beta.0",
+        "@gik/eslint-config-react": "0.0.4",
+        "@gik/npm": "^0.1.14",
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-inline-import": "^2.0.6",
         "babel-plugin-transform-react-jsx": "^7.0.0-beta.3",

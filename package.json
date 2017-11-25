@@ -11,7 +11,7 @@
         "url": "https://github.com/hectormenendez/site"
     },
     "scripts": {
-        "precommit:run": "[[ ! -z $(git ls-files -m ./$_target) ]] && (npm --prefix ./$_target run precommit && git add ./$_target/package*.json) || echo $_target skipped",
+        "precommit:run": "[[ ! -z $(git ls-files -m ./$_target) ]] && (npm --prefix ./$_target run precommit; git add -u ./$_target/package*.json) || echo $_target skipped",
         "precommit:back": "_target=back npm run precommit:run -s",
         "precommit:front": "_target=front npm run precommit:run -s",
         "precommit": "npm run precommit:back -s; npm run precommit:front -s; npm --no-git-tag-version version patch && git add ./package*.json"
