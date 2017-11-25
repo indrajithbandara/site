@@ -1,6 +1,19 @@
 {
-    "api": {
-        "host": "${hosts.public}",
-        "port": "${ports.back}"
+    "graphql": {
+        "url": {
+            "origin": "http",
+            "hostname": "${hosts.public}",
+            "port": "${ports.back}",
+            "pathname": "${endpoints.graphql}"
+        }
+    },
+    "suscription": {
+        "url": {
+            "protocol": "ws",
+            "hostname": "${hosts.public}",
+            "port": "${ports.socket}",
+            "pathname": "${endpoints.socket}",
+            "slashes": true
+        }
     }
 }

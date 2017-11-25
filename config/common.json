@@ -4,11 +4,12 @@
     },
     "ports": {
         "back": 8080,
-        "socket": 8888,
-        "front": 8000
+        "front": 8000,
+        "socket": 8888
     },
     "endpoints": {
         "graphql": "/graphql",
+        "socket": "/socket",
         "auth": "/auth"
     }
 }
