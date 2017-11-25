@@ -1,7 +1,7 @@
 {
     "production": false,
     "devServer": {
-        "host": "${hosts.public}",
+        "host": "${hosts.front}",
         "port": "${ports.front}"
     }
 }

@@ -67,6 +67,7 @@
         "helmet": "^3.9.0",
         "nedb": "^1.8.0",
         "pkg-dir": "^2.0.0",
+        "subscriptions-transport-ws": "^0.9.1",
         "superagent": "^3.8.1"
     },
     "devDependencies": {

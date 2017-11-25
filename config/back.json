@@ -1,19 +1,10 @@
 {
-    "server": {
-        "host": "${hosts.public}",
-        "port": "${ports.back}"
-    },
     "services": [
         "users",
         "tacos"
     ],
-    "graphql": {
-        "host": "${hosts.public}",
-        "port": "${ports.socket}",
-        "path": "${endpoints.graphql}"
-    },
     "auth": {
-        "path": "${endpoints.auth}",
+        "path": "/auth",
         "service": "users",
         "local": {
             "entity": "user",

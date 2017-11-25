@@ -1,6 +1,8 @@
 {
     "hosts": {
-        "public": "0.0.0.0"
+        "back": "0.0.0.0",
+        "front": "0.0.0.0",
+        "socket": "0.0.0.0"
     },
     "ports": {
         "back": 8080,
@@ -8,8 +10,19 @@
         "socket": 8888
     },
     "endpoints": {
-        "graphql": "/graphql",
-        "socket": "/socket",
-        "auth": "/auth"
+        "graphql": {
+            "protocol": "http",
+            "hostname": "${hosts.back}",
+            "port": "${ports.back}",
+            "pathname": "/graphql",
+            "slashes": true
+        },
+        "socket": {
+            "protocol": "ws",
+            "hostname": "${hosts.socket}",
+            "port": "${ports.socket}",
+            "pathname": "/socket",
+            "slashes": true
+        }
     }
 }

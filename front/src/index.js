@@ -12,19 +12,18 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // Local
 import Config from '#config'; // eslint-disable-line import/no-unresolved
-// import App from 'layouts/App';
 
-const cache = new ApolloCache(); // eslint-disable-line
-const link = ApolloSplitLink( // eslint-disable-line
+const cache = new ApolloCache();
+const link = ApolloSplitLink(
     ({ query }) => {
         const { kind, operation } = ApolloDefinition(query);
         return kind === 'OperationDefinition' && operation === 'suscription';
     },
     // linkHttp
-    ApolloLink({ uri: URL.format(Config.graphql.url) }),
+    ApolloLink({ uri: URL.format(Config.endpoints.graphql) }),
     // linkSubscription
     new ApolloSocket({
-        uri: URL.format(Config.suscription.url),
+        uri: URL.format(Config.endpoints.socket),
         options: { reconnect: true },
     }),
 );

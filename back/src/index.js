@@ -10,7 +10,7 @@ import Compression from 'compression';
 import BodyParser from 'body-parser';
 import { $ } from '@gik/tools-streamer';
 // Local modules
-import Config from './config';
+import ConfigFlat from './config';
 import Log from './logger';
 import Hooks from './hooks';
 import GraphQL from './graphql';
@@ -30,8 +30,8 @@ const feathersBase$ = feathers$
     .do(feathers => feathers
         // set configuration to server
         .configure(() => Object
-            .keys(Config)
-            .forEach(key => feathers.set(key, Config[key])))
+            .keys(ConfigFlat)
+            .forEach(key => feathers.set(key, ConfigFlat[key])))
         // Enable Cross Origin Resource Sharing
         .use(Cors())
         // Adds some security mesaurements (not bullet proof thoigh)
@@ -42,7 +42,7 @@ const feathersBase$ = feathers$
         .use(BodyParser.json())
         .use(BodyParser.urlencoded({ extended: true }))
         // Enable the static server on the public route
-        .use('/', Feathers.static(Config['path.static'])),
+        .use('/', Feathers.static(ConfigFlat['path.static'])),
     )
     .mapTo('Base');
 
@@ -105,13 +105,14 @@ $
     .switchMapTo(feathers$)
     .subscribe(
         feathers => feathers
-            .set('server.port', process.env.PORT || feathers.get('server.port'))
-            .set('server.host', process.env.HOST || feathers.get('server.host'))
-            .listen(feathers.get('server.port'), feathers.get('server.host'))
+            .listen(
+                feathers.get('ports.back'),
+                feathers.get('hosts.back'),
+            )
             .on('listening', () => Log.info(
-                'listening on %s:%d',
-                feathers.get('server.host'),
-                feathers.get('server.port'),
+                '[back] %s:%d',
+                feathers.get('hosts.back'),
+                feathers.get('ports.back'),
             ))
             .on('unhandledRejection', onError),
         onError,

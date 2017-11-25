@@ -1,4 +1,13 @@
 {
+    "endpoints": {
+        "graphiql": {
+            "protocol": "${endpoints.graphql.protocol}",
+            "hostname": "${endpoints.graphql.hostname}",
+            "port": "${endpoints.graphql.port}",
+            "pathname": "${endpoints.graphql.pathname}-ui",
+            "slashed": true
+        }
+    },
     "auth": {
         "jwt": {
             "audience": "http://localhost",
