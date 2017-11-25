@@ -1,41 +1,40 @@
-/* eslint-disable */
+import URL from 'url'; // NodeJS
+import { InMemoryCache as ApolloCache } from 'apollo-cache-inmemory';
+import { split as ApolloSplitLink } from 'apollo-link';
+import { getMainDefinition as ApolloDefinition } from 'apollo-utilities';
+import { createHttpLink as ApolloLink } from 'apollo-link-http';
+import { WebSocketLink as ApolloSocket } from 'apollo-link-ws';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
-import { split as ApolloSplitLink } from 'apollo-link';
-import { createHttpLink as ApolloLink } from 'apollo-link-http';
-import { InMemoryCache as ApolloCache } from 'apollo-cache-inmemory'; // eslint-disable-line
-import { WebSocketLink as ApolloSocket } from 'apollo-link-ws';
-import { getMainDefinition as ApolloDef } from 'apollo-utilities'; // eslint-disable-line
 import { BrowserRouter as Router } from 'react-router-dom';
+
 // Local
+import Config from '#config'; // eslint-disable-line import/no-unresolved
 // import App from 'layouts/App';
 
-const cache = new ApolloCache();
-const link = ApolloSplitLink(
+const cache = new ApolloCache(); // eslint-disable-line
+const link = ApolloSplitLink( // eslint-disable-line
     ({ query }) => {
-        const { kind, operation } = ApolloDef(query);
+        const { kind, operation } = ApolloDefinition(query);
         return kind === 'OperationDefinition' && operation === 'suscription';
     },
     // linkHttp
-    ApolloLink({ uri: 'http://localhost:8080/graphql' }),
+    ApolloLink({ uri: URL.format(Config.graphql.url) }),
     // linkSubscription
     new ApolloSocket({
-        uri: 'ws://localhost:8080/subscription',
-        options: {
-            reconnect: true
-        }
+        uri: URL.format(Config.suscription.url),
+        options: { reconnect: true },
     }),
 );
 
 ReactDOM.render(
-    // <ApolloProvider client={ new ApolloClient({ link, cache }) }>
-    //     <Router>
-    //         <h1>Hello world</h1>
-    //     </Router>
-    // </ApolloProvider>,
-    <h1>Hola</h1>,
+    <ApolloProvider client={ new ApolloClient({ link, cache }) }>
+        <Router>
+            <h1>Hello world</h1>
+        </Router>
+    </ApolloProvider>,
     document.getElementsByTagName('main')[0],
 );
 
