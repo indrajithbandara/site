@@ -1,6 +1,8 @@
 const PATH = require('path');
 const Webpack = require('webpack');
 const WebpackHtml = require('html-webpack-plugin');
+const { WebpackResolverPlugin } = require('@gik/tools-configurator'); // from @gik/npm
+const Package = require('../package.json');
 
 module.exports = ({ env, path }) => ({
 
@@ -28,6 +30,13 @@ module.exports = ({ env, path }) => ({
         modules: [path.src, 'node_modules'],
         // Whenever these aliases are used, resolve them to their counterpart.
         alias: {},
+        // plugins test
+        plugins: [
+            WebpackResolverPlugin('#config', {
+                ...Package['@gik/npm'].webpack.config,
+                path: path.cfg,
+            }),
+        ],
     },
 
     // Some libraries import Node modules (pointless in the browser) make dummies for'em.
