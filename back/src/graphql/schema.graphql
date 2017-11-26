@@ -25,5 +25,7 @@ type Query {
 
 type Mutation {
     tacoAdd (meat: String!, cheese: String!, salsa: String!): Taco
+    userDel (_id: String!): User
     userAdd (email: String!, password: String!): User
+    userMod (_id: String!, email: String, password: String): User
 }

@@ -1,4 +1,11 @@
 {
+    "endpoints": {
+        "auth": {
+            "protocol": "${protocols.back}",
+            "hostname": "${hosts.back}",
+            "port": "${ports.back}"
+        }
+    },
     "services": [
         "users",
         "tacos"

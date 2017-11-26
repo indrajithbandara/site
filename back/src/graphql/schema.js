@@ -1,5 +1,6 @@
 import Thrower from '@gik/tools-thrower';
 // Local
+import Log from 'logger';
 import { Env } from 'config';
 import AuthClient from 'auth/client';
 
@@ -27,7 +28,10 @@ export default function Resolvers() {
                     email,
                     password,
                 })
-                .catch(() => Thrower('Invalid Credentials', 'AuthError'))
+                .catch((error) => {
+                    Log.debug(error);
+                    Thrower('Invalid Credentials', 'AuthError');
+                })
                 .then(({ accessToken: token }) => AuthClient.passport
                     .verifyJWT(token)
                     .then(({ userId: _id }) => ({ _id, token })),
@@ -42,10 +46,26 @@ export default function Resolvers() {
 
             tacoAdd: (root, data, context) => tacos.create(data, context),
 
-            userAdd: priv
-                ? ((root, data) => users.create(data))
-                : {},
+            userAdd: !priv
+                ? {}
+                : (root, data) => users.create(data),
 
+            userDel: !priv
+                ? {}
+                : (root, { _id: id }) => users.remove(id),
+
+            userMod: !priv
+                ? {}
+                : (root, data) => {
+                    const { _id: id } = data;
+                    return users.patch(id, Object
+                        .keys(data)
+                        .reduce((acc, key) => {
+                            if (key === '_id' || !data[key]) return acc;
+                            return { ...acc, [key]: data[key] };
+                        }, {}),
+                    );
+                },
         },
     };
 }
