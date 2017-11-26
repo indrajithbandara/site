@@ -8,5 +8,5 @@ export const Component = () => <footer>
     </small></h6>
 </footer>;
 
-Object.defineProperty(Component, 'name', { value: 'ComponentFooter' });
+Object.defineProperty(Component, 'name', { value: 'LayoutFooter' });
 export default Component;

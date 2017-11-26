@@ -12,5 +12,5 @@ export const Component = () => <form>
     <button type="submit">Submit</button>
 </form>;
 
-Object.defineProperty(Component, 'name', { value: 'ComponentLogin' });
+Object.defineProperty(Component, 'name', { value: 'LayoutLogin' });
 export default Component;

@@ -9,10 +9,9 @@ import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router } from 'react-router-dom';
-
 // Local
 import Config from '#config'; // eslint-disable-line import/no-unresolved
-import App from 'layouts/app';
+import Layout from 'layouts';
 
 const cache = new ApolloCache();
 const link = ApolloSplitLink(
@@ -32,7 +31,7 @@ const link = ApolloSplitLink(
 ReactDOM.render(
     <ApolloProvider client={ new ApolloClient({ link, cache }) }>
         <Router>
-            <App/>
+            <Layout/>
         </Router>
     </ApolloProvider>,
     document.getElementsByTagName('main')[0],
