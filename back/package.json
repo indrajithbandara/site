@@ -42,7 +42,7 @@
     },
     "dependencies": {
         "@gik/tools-checker": "0.0.11",
-        "@gik/tools-configurator": "0.0.5",
+        "@gik/tools-configurator": "0.0.6",
         "@gik/tools-logger": "0.0.9",
         "@gik/tools-mapper": "0.0.7",
         "@gik/tools-populator": "0.0.5",
@@ -63,7 +63,7 @@
         "feathers-rest": "^1.8.1",
         "graphql": "^0.11.7",
         "graphql-server-express": "^1.2.0",
-        "graphql-tools": "^2.7.2",
+        "graphql-tools": "^2.8.0",
         "helmet": "^3.9.0",
         "nedb": "^1.8.0",
         "pkg-dir": "^2.0.0",
@@ -72,7 +72,7 @@
     },
     "devDependencies": {
         "@gik/eslint-config-node": "0.0.5",
-        "@gik/npm": "^0.1.13",
+        "@gik/npm": "^0.1.14",
         "babel-plugin-inline-import": "^2.0.6",
         "eslint-import-resolver-node": "^0.3.1"
     }

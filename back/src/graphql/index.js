@@ -1,5 +1,6 @@
 import HTTP from 'http';
 import URL from 'url';
+import BodyParser from 'body-parser';
 import { makeExecutableSchema as SchemaGQL } from 'graphql-tools';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute as GraphqlExecute, subscribe as GraphqlSubscribe } from 'graphql';
@@ -17,10 +18,10 @@ export default function GraphQL() {
 
     const schema = SchemaGQL({ typeDefs: TypeDefs, resolvers: Resolvers.call(this) });
 
-    this.use(Config.endpoints.graphql.pathname, ExpressGQL({
+    this.use(Config.endpoints.graphql.pathname, BodyParser.json(), ExpressGQL({
         schema,
         // Don't log errors to stderr, it'll be done by formatError
-        debug: false,
+        debug: true,
         // don't format errors, we got this. (omiting stack for obscurity)
         formatError: (error) => {
             const { name, message, stack } = error.originalError
@@ -40,7 +41,10 @@ export default function GraphQL() {
             ],
         }));
     }
+
     // Configure subscriptions socket
+    // TODO: Errors are not being formatted when using this interface, upon research
+    //       found out about the  `formatResponse` method, so, dig into that.
     const ws = HTTP.createServer(this);
     SubscriptionServer.create(
         {

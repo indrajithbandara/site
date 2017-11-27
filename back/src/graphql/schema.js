@@ -1,6 +1,6 @@
+/* eslint-disable */
 import Thrower from '@gik/tools-thrower';
 // Local
-import Log from 'logger';
 import { Env } from 'config';
 import AuthClient from 'auth/client';
 
@@ -23,23 +23,25 @@ export default function Resolvers() {
                 : {},
 
             user: (root, { email, password }) => AuthClient
+                // Use the client to make a cal to authenticate
                 .authenticate({
                     strategy: 'local',
                     email,
                     password,
                 })
-                .catch((error) => {
-                    Log.debug(error);
-                    Thrower('Invalid Credentials', 'AuthError');
-                })
+                // if an error happens (no matter the type) send back this error.
+                // the error will be catched by the logger on hooks anyways.
+                .catch(() => Thrower('Invalid credentials', 'AuthError'))
+                // Authentication was correct, make sure the token is valid an return it.
                 .then(({ accessToken: token }) => AuthClient.passport
                     .verifyJWT(token)
                     .then(({ userId: _id }) => ({ _id, token })),
                 )
+                // Complement the user information with the database.
                 .then(({ _id, token }) => users
                     .get(_id)
                     .then(user => ({ ...user, token })),
-                ),
+                )
         },
 
         Mutation: {
