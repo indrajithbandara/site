@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.13",
+    "version": "0.0.15",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -55,6 +55,8 @@
         "apollo-link-ws": "^1.0.1",
         "apollo-utilities": "^1.0.2",
         "graphql": "^0.11.7",
+        "graphql-tag": "^2.5.0",
+        "prop-types": "^15.6.0",
         "react": "^16.1.1",
         "react-apollo": "^2.0.1",
         "react-dom": "^16.1.1",

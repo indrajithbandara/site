@@ -1,31 +1,30 @@
 import URL from 'url'; // NodeJS
-import { InMemoryCache as ApolloCache } from 'apollo-cache-inmemory';
-import { split as ApolloSplitLink } from 'apollo-link';
-import { getMainDefinition as ApolloDefinition } from 'apollo-utilities';
-import { createHttpLink as ApolloLink } from 'apollo-link-http';
-import { WebSocketLink as ApolloSocket } from 'apollo-link-ws';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
+import { InMemoryCache as ApolloCache } from 'apollo-cache-inmemory';
+import { split as ApolloLinkSplit } from 'apollo-link';
+import { createHttpLink as ApolloLinkHttp } from 'apollo-link-http';
+import { WebSocketLink as ApolloLinkSocket } from 'apollo-link-ws';
+import { getMainDefinition as ApolloDefinition } from 'apollo-utilities';
 import { BrowserRouter as Router } from 'react-router-dom';
 // Local
 import Config from '#config'; // eslint-disable-line import/no-unresolved
 import Layout from 'layouts';
 
 const cache = new ApolloCache();
-const link = ApolloSplitLink(
+// Determine which link to use depending on the operation being perfomed.
+const link = ApolloLinkSplit(
     ({ query }) => {
         const { kind, operation } = ApolloDefinition(query);
         return kind === 'OperationDefinition' && operation === 'suscription';
     },
-    // linkHttp
-    ApolloLink({ uri: URL.format(Config.endpoints.graphql) }),
-    // linkSubscription
-    new ApolloSocket({
+    new ApolloLinkSocket({
         uri: URL.format(Config.endpoints.socket),
         options: { reconnect: true },
     }),
+    ApolloLinkHttp({ uri: URL.format(Config.endpoints.graphql) }),
 );
 
 ReactDOM.render(
