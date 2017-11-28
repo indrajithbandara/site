@@ -33,12 +33,7 @@ export default {
     },
 
     after: {
-        all: [
-            // FeathersHooksCommon.when(
-            //     hook => hook.params.provider,
-            //     FeathersHooksCommon.discard('password'),
-            // ),
-        ],
+        all: [],
         find: [],
         get: [],
         create: [],
