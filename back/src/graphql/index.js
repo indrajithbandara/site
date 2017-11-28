@@ -1,6 +1,5 @@
 import HTTP from 'http';
 import URL from 'url';
-import BodyParser from 'body-parser';
 import { makeExecutableSchema as SchemaGQL } from 'graphql-tools';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute as GraphqlExecute, subscribe as GraphqlSubscribe } from 'graphql';
@@ -18,8 +17,10 @@ export default function GraphQL() {
 
     const schema = SchemaGQL({ typeDefs: TypeDefs, resolvers: Resolvers.call(this) });
 
-    this.use(Config.endpoints.graphql.pathname, BodyParser.json(), ExpressGQL({
+    this.use(Config.endpoints.graphql.pathname, ExpressGQL(request => ({
         schema,
+        // Expose headers sent as context (authentication token will travel there)
+        context: request.headers,
         // Don't log errors to stderr, it'll be done by formatError
         debug: true,
         // don't format errors, we got this. (omiting stack for obscurity)
@@ -31,7 +32,7 @@ export default function GraphQL() {
             Log.debug(stack);
             return { name, message };
         },
-    }));
+    })));
 
     if (process.env.NODE_ENV !== 'production') {
         this.get(Config.endpoints.graphiql.pathname, ExpressGuiQL({

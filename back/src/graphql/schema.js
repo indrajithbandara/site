@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Thrower from '@gik/tools-thrower';
 // Local
 import { Env } from 'config';
@@ -8,20 +7,20 @@ const priv = Env !== 'production';
 
 export default function Resolvers() {
 
-    const tacos = this.service('tacos');
     const users = this.service('users');
+
     return {
 
         Query: {
 
-            tacos: (root, query) => tacos.find({ query }),
+            // Get a list of users (protected)
+            users: ((root, vars, { token }) => AuthClient.passport
+                .verifyJWT(token)
+                .then(() => users.find())
+                .catch(() => Thrower('Invalid token', 'AuthError'))
+            ),
 
-            taco: (root, { _id }) => tacos.get(_id),
-
-            users: priv
-                ? (() => users.find())
-                : {},
-
+            // Get an specific user (public)
             user: (root, { email, password }) => AuthClient
                 // Use the client to make a cal to authenticate
                 .authenticate({
@@ -29,9 +28,6 @@ export default function Resolvers() {
                     email,
                     password,
                 })
-                // if an error happens (no matter the type) send back this error.
-                // the error will be catched by the logger on hooks anyways.
-                .catch(() => Thrower('Invalid credentials', 'AuthError'))
                 // Authentication was correct, make sure the token is valid an return it.
                 .then(({ accessToken: token }) => AuthClient.passport
                     .verifyJWT(token)
@@ -42,11 +38,12 @@ export default function Resolvers() {
                     .get(_id)
                     .then(user => ({ ...user, token })),
                 )
+                // if an error happens (no matter the type) send back this error.
+                // the error will be catched by the logger on hooks anyways.
+                .catch(() => Thrower('Invalid credentials', 'AuthError')),
         },
 
         Mutation: {
-
-            tacoAdd: (root, data, context) => tacos.create(data, context),
 
             userAdd: !priv
                 ? {}

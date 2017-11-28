@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -51,6 +51,7 @@
         "apollo-cache-inmemory": "^1.1.1",
         "apollo-client": "^2.0.3",
         "apollo-link": "^1.0.3",
+        "apollo-link-context": "^1.0.1",
         "apollo-link-http": "^1.2.0",
         "apollo-link-ws": "^1.0.1",
         "apollo-utilities": "^1.0.2",

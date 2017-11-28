@@ -1,22 +1,14 @@
-type Taco {
-    _id: String
-    meat: String
-    cheese: String
-    salsa: String
-}
-
 type User {
     _id: String!
-    email: String!
     token: String
+    email: String!
+    nameFirst: String
+    nameLast: String
 }
 
 # ------------------------------------------------------------------------------
 
 type Query {
-    tacos(meat: String, cheese: String, salsa: String): [Taco]
-    taco(_id: String!): Taco
-
     users: [User]
     user(email: String! password: String!): User
 }
@@ -24,7 +16,6 @@ type Query {
 # ------------------------------------------------------------------------------
 
 type Mutation {
-    tacoAdd (meat: String!, cheese: String!, salsa: String!): Taco
     userDel (_id: String!): User
     userAdd (email: String!, password: String!): User
     userMod (_id: String!, email: String, password: String): User
