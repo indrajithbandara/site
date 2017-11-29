@@ -1,22 +1,39 @@
 type User {
-    _id: String!
-    token: String
-    email: String!
-    nameFirst: String
-    nameLast: String
+    _id: String!,
+    token: String,
+    email: String!,
+    nameFirst: String,
+    nameLast: String,
 }
 
 # ------------------------------------------------------------------------------
 
 type Query {
     users: [User]
-    user(email: String! password: String!): User
+
+    user(
+        email: String!,
+        password: String!,
+    ): User
 }
 
 # ------------------------------------------------------------------------------
 
 type Mutation {
-    userDel (_id: String!): User
-    userAdd (email: String!, password: String!): User
-    userMod (_id: String!, email: String, password: String): User
+    userDel (
+        _id: String!,
+    ): User
+
+    userAdd (
+        email: String!,
+        password: String!,
+    ): User
+
+    userMod (
+        _id: String!,
+        email: String!,
+        password: String!,
+        nameFirst: String,
+        nameLast: String,
+    ): User
 }
