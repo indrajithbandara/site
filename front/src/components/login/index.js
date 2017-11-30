@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Redirect as RouterRedirect } from 'react-router-dom';
 import { withApollo as WithApollo } from 'react-apollo';
 // Local
-import ComponentErrors from 'components/errors';
 import ComponentLoading from 'components/loading';
+import ComponentMessages, { CatchErrorMessages } from 'components/messages';
 
 export const Schema = {
     queryUser: GQL`query ($email: String!, $password: String! ) {
@@ -18,7 +18,7 @@ export const Schema = {
 export const State = {
     loading: false,
     redirect: false,
-    errors: [],
+    messages: [],
     email: '',
     password: '',
 };
@@ -54,7 +54,7 @@ export class Component extends React.Component {
                         value={ this.state.password }
                         onChange={ this.handleChange }/>
                 </section>
-                <ComponentErrors errors={ this.state.errors }/>
+                <ComponentMessages messages={ this.state.messages }/>
                 <button
                     type="submit"
                     disabled={ !(this.state.email.length && this.state.password.length) }>
@@ -75,9 +75,9 @@ export class Component extends React.Component {
                     password: this.state.password,
                 },
             })
-            .catch(error => ({ errors: error.graphQLErrors }))
-            .then(({ errors, data }) => {
-                if (errors) return this.setState({ ...State, errors });
+            .catch(error => ({ messages: CatchErrorMessages(error) }))
+            .then(({ messages, data }) => {
+                if (messages) return this.setState({ ...State, messages });
                 // Set user to localStorage, state to default and redirect.
                 Object
                     .keys(data.user)
@@ -92,7 +92,7 @@ export class Component extends React.Component {
 
     handleChange = e => this.setState({
         [e.target.name]: e.target.value,
-        errors: [],
+        messages: [],
     });
 }
 
