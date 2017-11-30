@@ -4,6 +4,12 @@ export default {
 
     query: GQL`query { users { _id, email, nameFirst, nameLast }}`,
 
+    mutationDel: GQL`mutation ($_id: String!) {
+        userDel(_id: $_id) {
+            _id
+        }
+    }`,
+
     mutationMod: GQL`mutation (
         $_id: String!,
         $email: String!,
@@ -19,4 +25,5 @@ export default {
             nameLast: $nameLast,
         ) { _id, email, nameFirst, nameLast } # has to be the same as Query
     }`,
+
 };

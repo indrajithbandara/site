@@ -9,4 +9,6 @@ export default ApolloCompose(
     WithApolloGraphql(Schema.query),
     // Allows to update users
     WithApolloGraphql(Schema.mutationMod, { name: 'mutationMod' }),
+    // Allows to delete users
+    WithApolloGraphql(Schema.mutationDel, { name: 'mutationDel' }),
 )(Component);

@@ -16,8 +16,8 @@ export default function Resolvers() {
             // Get a list of users (protected)
             users: ((root, vars, { token }) => AuthClient.passport
                 .verifyJWT(token)
-                .then(() => users.find())
                 .catch(() => Thrower('Invalid token', 'AuthError'))
+                .then(() => users.find())
             ),
 
             // Get an specific user (public)
@@ -49,22 +49,24 @@ export default function Resolvers() {
                 ? {}
                 : (root, data) => users.create(data),
 
-            userDel: !priv
-                ? {}
-                : (root, { _id: id }) => users.remove(id),
+            userDel: (root, vars, { token }) => AuthClient.passport
+                .verifyJWT(token)
+                .catch(() => Thrower('Invalid token', 'AuthError'))
+                .then(() => users.remove(vars._id)),
 
-            userMod: !priv
-                ? {}
-                : (root, data) => {
-                    const { _id: id } = data;
+            userMod: (root, vars, { token }) => AuthClient.passport
+                .verifyJWT(token)
+                .catch(() => Thrower('Invalid token', 'AuthError'))
+                .then(() => {
+                    const { _id: id } = vars;
                     return users.patch(id, Object
-                        .keys(data)
+                        .keys(vars)
                         .reduce((acc, key) => {
-                            if (key === '_id' || !data[key]) return acc;
-                            return { ...acc, [key]: data[key] };
+                            if (key === '_id' || !vars[key]) return acc;
+                            return { ...acc, [key]: vars[key] };
                         }, {}),
                     );
-                },
+                }),
         },
     };
 }

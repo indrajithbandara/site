@@ -1,12 +1,8 @@
 import React from 'react';
 // Local
+import ComponentMessages from 'components/messages';
 import ComponentLoading from 'components/loading';
-import ComponentMessages, { CatchErrorMessages } from 'components/messages';
-import Schema from './schema';
-
-/* TODO:
-   - Implemente onDelete
-*/
+import { Mutate } from './common';
 
 export const State = {
     users: null, // null when not loaded, array when loaded
@@ -85,43 +81,23 @@ export class Component extends React.Component {
         return true;
     };
 
-    /**
-     * @description Triggers the mutation to update an user.
-     * @param {Object} event - The Dom event.
-     * @param {Function} event.preventDefault - Stop the usual behaviour (sending form).
-     * @param {DOMElement} event.target - The form sending the event.
-     */
     handleUpdate = (event) => {
         event.preventDefault();
-        const { _id } = event.target.dataset;
-        const variables = this.state.users
-            .filter(user => user._id === _id)
-            .shift();
-        this.setState({ loading: true });
-        this.props
-            .mutationMod({
-                variables,
-                optimisticResponse: { userMod: variables },
-                // Update the information on the store.
-                // it will trigger componentWillReceiveProps with the latest changes.
-                update(store, { data: { userMod: user } }) {
-                    const data = store.readQuery({ query: Schema.query });
-                    data.users.splice(data.users.indexOf(user._id), 1, user);
-                    store.writeQuery({ query: Schema.query, data });
-                },
-            })
-            .catch(error => ({ messages: CatchErrorMessages(error) }))
-            .then(({ messages }) => this.setState({
-                loading: false,
-                messages: messages || [{
-                    name: 'Sucess',
-                    type: 'info',
-                    message: 'User modified.',
-                }],
-            }));
-        return false;
+        return Mutate(this, event.target.dataset._id, 'mutationMod', {
+            name: 'Success',
+            type: 'info',
+            message: `User ${event.target.dataset._id} was updated.`,
+        });
     }
 
+    handleDelete = (event) => {
+        event.preventDefault();
+        return Mutate(this, event.target.dataset._id, 'mutationDel', {
+            name: 'Success',
+            type: 'info',
+            message: `User ${event.target.dataset._id} was deleted.`,
+        });
+    }
 }
 
 Object.defineProperty(Component, 'name', { value: 'ComponentUsersMod' });

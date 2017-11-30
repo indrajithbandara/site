@@ -4,7 +4,8 @@ module.exports = {
     extends: '@gik/node',
     rules: {
         'import/no-dynamic-require': 'off',
-        'import/no-names-as-default-member': 'off'
+        'import/no-names-as-default-member': 'off',
+        'no-underscore-dangle': 'off'
     },
     settings: {
         'import/resolver': {
