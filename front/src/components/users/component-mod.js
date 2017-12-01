@@ -12,7 +12,6 @@ export const State = {
     messages: [],
 };
 
-
 export class Component extends React.Component {
 
     state = State;
@@ -43,10 +42,6 @@ export class Component extends React.Component {
         </section>;
     }
 
-    /**
-     * @description Sets the value of element into corresponding property of user in state
-     * @param {Object} event - The DOM event.
-     */
     handleInput = ({ target: { name, value, dataset: { _id } } }) => {
         this.setState({
             ...State,
@@ -56,23 +51,30 @@ export class Component extends React.Component {
         return true;
     };
 
+    handleResponse = (errors, message) => this.setState({
+        loading: false,
+        messages: errors || [{ name: 'Sucess', type: 'info', message }],
+    });
+
     handleUpdate = (event) => {
         event.preventDefault();
-        return Mutate(this, event.target.dataset._id, 'mutationMod', {
-            name: 'Success',
-            type: 'info',
-            message: `User ${event.target.dataset._id} was updated.`,
-        });
-    }
+        this.setState({ loading: true });
+        Mutate(
+            this.props.mutationMod,
+            this.state.users.find(user => user._id === event.target.dataset._id),
+        ).then(({ errors }) => this.handleResponse(errors, 'User updated'));
+        return false;
+    };
 
     handleDelete = (event) => {
         event.preventDefault();
-        return Mutate(this, event.target.dataset._id, 'mutationDel', {
-            name: 'Success',
-            type: 'info',
-            message: `User ${event.target.dataset._id} was deleted.`,
-        });
-    }
+        this.setState({ loading: true });
+        Mutate(
+            this.props.mutationDel,
+            this.state.users.find(user => user._id === event.target.dataset._id),
+        ).then(({ errors }) => this.handleResponse(errors, 'User deleted'));
+        return false;
+    };
 }
 
 export default Component;

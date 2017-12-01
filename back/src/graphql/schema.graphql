@@ -1,7 +1,7 @@
 type User {
     _id: String!,
-    token: String,
     email: String!,
+    token: String,
     nameFirst: String,
     nameLast: String,
 }
@@ -21,13 +21,11 @@ type Query {
 # ------------------------------------------------------------------------------
 
 type Mutation {
-    userDel (
-        _id: String!,
-    ): User
-
     userAdd (
         email: String!,
         password: String!,
+        nameFirst: String,
+        nameLast: String,
     ): User
 
     userMod (
@@ -37,4 +35,9 @@ type Mutation {
         nameFirst: String,
         nameLast: String,
     ): User
+
+    userDel (
+        _id: String!,
+    ): User
+
 }
