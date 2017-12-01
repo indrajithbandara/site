@@ -19,7 +19,7 @@ module.exports = ({ env, path }) => ({
         // Where should the bundle be put?
         path: path.out,
         // The public URL for the root on the browser
-        publicPath: '',
+        publicPath: '/',
     },
 
     // Tell the module resolver how to behave
