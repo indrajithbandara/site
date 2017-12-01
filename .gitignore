@@ -7,3 +7,7 @@ coverage
 
 # backend authentication secret
 /config/back-auth.json
+
+# Needed for helm on emacs (projects have their own gitgnore rules)
+/front/out
+/back/out
