@@ -2,6 +2,8 @@ import React from 'react';
 // Local
 import ComponentMessages from 'components/messages';
 import ComponentLoading from 'components/loading';
+import ComponentHeader from './component-header';
+import ComponentFooter from './component-footer';
 import { Mutate } from './common';
 
 export const State = {
@@ -9,6 +11,7 @@ export const State = {
     loading: null,
     messages: [],
 };
+
 
 export class Component extends React.Component {
 
@@ -28,43 +31,15 @@ export class Component extends React.Component {
         // Data is ready to be shown.
         return <section>
             <ComponentMessages messages={ this.state.messages } />
-            <header>
-                <span>Email</span>
-                <span>First Name</span>
-                <span>Last Name</span>
-                <span>Password</span>
-                <span>Actions</span>
-            </header>
-            <footer>{this.state.users.map((user) => {
-                const props = name => ({ // DRY
-                    name,
-                    'data-_id': user._id,
-                    onChange: this.handleInput,
-                    value: user[name] || '',
-                });
-                return <form
-                    key={ user._id }
-                    data-_id={ user._id }
-                    onSubmit={ this.handleUpdate }
-                    onReset={ this.handleDelete }>
-                    <label>
-                        <input type="email" required="true" { ...props('email') } />
-                    </label>
-                    <label>
-                        <input type="text" { ...props('nameFirst') } />
-                    </label>
-                    <label>
-                        <input type="text" { ...props('nameLast') } />
-                    </label>
-                    <label>
-                        <input type="password" required="true" { ...props('password') }/>
-                    </label>
-                    <label>
-                        <button type="submit">Update</button>
-                        <button type="reset">Delete</button>
-                    </label>
-                </form>;
-            })}</footer>
+            <ComponentHeader/>
+            <ComponentFooter
+                labelSubmit = "Update"
+                labelReset = "Delete"
+                users={ this.state.users }
+                onChange={ this.handleInput }
+                onSubmit={ this.handleUpdate }
+                onReset={ this.handleDelete}
+            />
         </section>;
     }
 
@@ -100,5 +75,4 @@ export class Component extends React.Component {
     }
 }
 
-Object.defineProperty(Component, 'name', { value: 'ComponentUsersMod' });
 export default Component;

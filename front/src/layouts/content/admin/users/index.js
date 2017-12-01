@@ -1,9 +1,13 @@
 import React from 'react';
 // Local
-import ComponentUsersMod from 'components/users-mod';
+import {
+    Mod as ComponentUsersMod,
+    Add as ComponentUsersAdd,
+} from 'components/users';
 
 export const Component = () => <section>
     <h3>Usuarios</h3>
+    <ComponentUsersAdd/>
     <ComponentUsersMod/>
 </section>;
 

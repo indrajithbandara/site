@@ -2,6 +2,8 @@
 import { CatchErrorMessages } from 'components/messages';
 import Schema from './schema';
 
+export const ComponentName = 'ComponentUsers';
+
 /**
  * @description Triggers the mutation to update an user.
  * @param {instanceof React.Component} component - The instance of the current component.

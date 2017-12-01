@@ -5,6 +5,7 @@ type User {
     nameFirst: String,
     nameLast: String,
 }
+{ _id, email, nameFirst, nameLast }
 
 # ------------------------------------------------------------------------------
 
