@@ -8,6 +8,7 @@
         "./src/**/*.js"
     ],
     "plugins": {
+        "jsx": {},
         "doc_comment": {},
         "es_modules": {}
     }

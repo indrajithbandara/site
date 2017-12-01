@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.24",
+    "version": "0.0.26",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -71,8 +71,11 @@
         "babel-plugin-inline-import": "^2.0.6",
         "babel-plugin-transform-react-jsx": "^7.0.0-beta.3",
         "babel-preset-react": "^7.0.0-beta.3",
+        "css-loader": "^0.28.7",
         "eslint-loader": "^1.9.0",
         "html-loader": "^0.5.1",
-        "html-webpack-plugin": "^2.30.1"
+        "html-webpack-plugin": "^2.30.1",
+        "style-loader": "^0.19.0",
+        "tern-jsx": "^1.0.3"
     }
 }

@@ -29,7 +29,9 @@ module.exports = ({ env, path }) => ({
         // if ommited, assume one of these paths
         modules: [path.src, 'node_modules'],
         // Whenever these aliases are used, resolve them to their counterpart.
-        alias: {},
+        alias: {
+            'Draft.css': PATH.join(path.root, 'node_modules', 'draft-js', 'dist', 'Draft.css'),
+        },
         // plugins test
         plugins: [
             WebpackResolverPlugin('#config', {
@@ -63,7 +65,23 @@ module.exports = ({ env, path }) => ({
                     options: {},
                 },
             },
-
+            {
+                test: /\.css$/,
+                include: [
+                    path.src,
+                    PATH.join(path.root, 'node_modules', 'draft-js', 'dist', 'Draft.css'),
+                ],
+                use: [
+                    {
+                        loader: 'style-loader',
+                        options: {},
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {},
+                    },
+                ],
+            },
             {
                 // js or jsx files
                 test: /\.jsx?$/,
