@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link as RouteLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Component = () => <header>
     <h1>
-        <RouteLink to="/">Héctor Menéndez</RouteLink>
+        <RouterLink to="/">Héctor Menéndez</RouterLink>
     </h1>
 </header>;
 
