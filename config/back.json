@@ -8,7 +8,7 @@
     },
     "services": [
         "users",
-        "tacos"
+        "posts"
     ],
     "auth": {
         "path": "/auth",
