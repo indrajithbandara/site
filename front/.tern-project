@@ -2,7 +2,8 @@
     "ecmaVersion": 8,
     "libs": [
         "browser",
-        "ecmaScript"
+        "ecmaScript",
+        "react"
     ],
     "loadEagerly": [
         "./src/**/*.js"
