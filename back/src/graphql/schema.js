@@ -1,9 +1,6 @@
 import Thrower from '@gik/tools-thrower';
 // Local
-import { Env } from 'config';
-import AuthClient from 'auth/client';
-
-const priv = Env !== 'production';
+import { AuthClient, TokenValidate } from 'auth/client';
 
 export default function Resolvers() {
 
@@ -14,9 +11,7 @@ export default function Resolvers() {
         Query: {
 
             // Get a list of users (protected)
-            users: ((root, vars, { token }) => AuthClient.passport
-                .verifyJWT(token)
-                .catch(() => Thrower('Invalid token', 'AuthError'))
+            users: ((root, vars, { token }) => TokenValidate(token)
                 .then(() => users.find())
             ),
 
@@ -29,8 +24,7 @@ export default function Resolvers() {
                     password,
                 })
                 // Authentication was correct, make sure the token is valid an return it.
-                .then(({ accessToken: token }) => AuthClient.passport
-                    .verifyJWT(token)
+                .then(({ accessToken: token }) => TokenValidate(token)
                     .then(({ userId: _id }) => ({ _id, token })),
                 )
                 // Complement the user information with the database.
@@ -45,18 +39,13 @@ export default function Resolvers() {
 
         Mutation: {
 
-            userAdd: !priv
-                ? {}
-                : (root, data) => users.create(data),
+            userAdd: (root, vars, { token }) => TokenValidate(token)
+                .then(() => users.create(vars)),
 
-            userDel: (root, vars, { token }) => AuthClient.passport
-                .verifyJWT(token)
-                .catch(() => Thrower('Invalid token', 'AuthError'))
+            userDel: (root, vars, { token }) => TokenValidate(token)
                 .then(() => users.remove(vars._id)),
 
-            userMod: (root, vars, { token }) => AuthClient.passport
-                .verifyJWT(token)
-                .catch(() => Thrower('Invalid token', 'AuthError'))
+            userMod: (root, vars, { token }) => TokenValidate(token)
                 .then(() => {
                     const { _id: id } = vars;
                     return users.patch(id, Object

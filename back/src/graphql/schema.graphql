@@ -5,7 +5,21 @@ type User {
     nameFirst: String,
     nameLast: String,
 }
-{ _id, email, nameFirst, nameLast }
+
+type Topic {
+    _id: String!,
+    name: String!,
+}
+
+type Post {
+    _id: String!,
+    user: User!,
+    public: Boolean!,
+    topics: [Topic]!,
+    content: String!,
+    dateAdd: String!,
+    dateMod: String,
+}
 
 # ------------------------------------------------------------------------------
 
@@ -21,6 +35,8 @@ type Query {
 # ------------------------------------------------------------------------------
 
 type Mutation {
+
+    # Adds users to database
     userAdd (
         email: String!,
         password: String!,
@@ -28,6 +44,7 @@ type Mutation {
         nameLast: String,
     ): User
 
+    # Updates users in database
     userMod (
         _id: String!,
         email: String!,
@@ -36,6 +53,7 @@ type Mutation {
         nameLast: String,
     ): User
 
+    # Removed users in database
     userDel (
         _id: String!,
     ): User
