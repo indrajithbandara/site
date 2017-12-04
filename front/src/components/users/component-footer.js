@@ -49,13 +49,13 @@ export const Component = (props) => {
     </footer>;
 };
 
-Component.PropTypes = {
+Component.propTypes = {
     users: PropTypes
         .arrayOf(PropTypes.shape({
             email: PropTypes.string.isRequired,
             nameFirst: PropTypes.string,
             nameLast: PropTypes.string,
-            password: PropTypes.string.isRequired,
+            password: PropTypes.string,
         }))
         .isRequired,
     labelSubmit: PropTypes.string.isRequired,

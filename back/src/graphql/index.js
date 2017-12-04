@@ -1,6 +1,5 @@
 import HTTP from 'http';
 import URL from 'url';
-import { makeExecutableSchema as SchemaGQL } from 'graphql-tools';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute as GraphqlExecute, subscribe as GraphqlSubscribe } from 'graphql';
 import {
@@ -10,19 +9,18 @@ import {
 // Local
 import { Back as Config } from 'config';
 import Log from 'logger';
-import TypeDefs from './schema.graphql';
-import Resolvers from './schema';
+import Schema from './schema';
 
 export default function GraphQL() {
 
-    const schema = SchemaGQL({ typeDefs: TypeDefs, resolvers: Resolvers.call(this) });
+    const schema = Schema.call(this);
 
     this.use(Config.endpoints.graphql.pathname, ExpressGQL(request => ({
         schema,
         // Expose headers sent as context (authentication token will travel there)
         context: request.headers,
         // Don't log errors to stderr, it'll be done by formatError
-        debug: true,
+        debug: false,
         // don't format errors, we got this. (omiting stack for obscurity)
         formatError: (error) => {
             const { name, message, stack } = error.originalError

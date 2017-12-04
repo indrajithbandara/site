@@ -36,13 +36,13 @@ export default {
         }
     }`,
 
-    mutationMod: GQL`mutation ($_id: String!, ${arg.vars}) {
+    mutationMod: GQL`mutation ($_id: ID!, ${arg.vars}) {
         userMod(_id: $_id, ${arg.vals}) {
             ${fragment}
         }
     }`,
 
-    mutationDel: GQL`mutation ($_id: String!) {
+    mutationDel: GQL`mutation ($_id: ID!) {
         userDel(_id: $_id) {
             _id
         }

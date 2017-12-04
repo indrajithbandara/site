@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.28",
+    "version": "0.0.29",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
