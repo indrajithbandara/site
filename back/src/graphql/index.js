@@ -14,7 +14,7 @@ import {
 // Local
 import Log from 'logger';
 import { Back as Config } from 'config';
-import { Type, TypeSchema } from './types';
+import { TypeOutput, TypeSchema } from './types';
 import Schema from './schema';
 
 export default feathers => $
@@ -49,7 +49,7 @@ export default feathers => $
         // Register root types
         Object.keys(schema)
             // eslint-disable-next-line no-param-reassign
-            .forEach((key) => { schema[key] = new Type(schema[key]); });
+            .forEach((key) => { schema[key] = new TypeOutput(schema[key]); });
         return new TypeSchema(schema);
     })
     // Configure Express

@@ -2,6 +2,7 @@ import Thrower from '@gik/tools-thrower';
 import {
     GraphQLSchema,
     GraphQLObjectType,
+    GraphQLInputObjectType,
     GraphQLID,
     GraphQLBoolean,
     GraphQLString,
@@ -10,7 +11,8 @@ import {
     GraphQLScalarType,
 } from 'graphql';
 
-export const Type = GraphQLObjectType;
+export const TypeOutput = GraphQLObjectType;
+export const TypeInput = GraphQLInputObjectType;
 export const TypeSchema = GraphQLSchema;
 export const TypeID = GraphQLID;
 export const TypeList = GraphQLList;
@@ -48,8 +50,21 @@ export const TypeDate = new GraphQLScalarType({
     },
 });
 
+/**
+ * @description Shorhand for getting fields.
+ * @param {Object} fields - Declaration of fields.
+ * @returns {Function} - The function to get fields.
+ */
+export const FieldGetter = fields => (name, nonNull = false) => ({
+    ...fields[name],
+    type: !nonNull
+        ? fields[name].type
+        : new TypeNonNull(fields[name].type),
+});
+
 export default {
-    object: Type,
+    output: TypeOutput,
+    input: TypeInput,
     schema: TypeSchema,
     id: TypeID,
     list: TypeList,
@@ -60,7 +75,7 @@ export default {
 };
 
 // TODO: This should be on its own service.
-export const TypeTopic = new Type({
+export const TypeTopic = new TypeOutput({
     description: 'A group where to categorize content.',
     name: 'Topic',
     fields: {
