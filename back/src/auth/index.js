@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import PATH from 'path';
 // NPM modules
 import FeathersAuth from 'feathers-authentication';
@@ -17,6 +16,7 @@ export default $
     .map((access) => {
         if (!access) Thrower(['Expecting a secret file on %s', secret], 'AuthSecretError');
         const strategies = ['jwt', 'local'];
+        // eslint-disable-next-line global-require
         const config = DeepMerge({ ...Config.auth, strategies }, require(access));
         return function Authentication() {
             this

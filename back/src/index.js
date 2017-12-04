@@ -72,7 +72,7 @@ const feathersServices$ = $
     .mapTo('Services');
 
 const feathersGraphQL$ = feathers$
-    .do(feathers => feathers.configure(GraphQL))
+    .mergeMap(feathers => GraphQL(feathers))
     .mapTo('GraphQL');
 
 const feathersFallback$ = feathers$

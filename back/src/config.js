@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import PATH from 'path';
 import ToolPopulator from '@gik/tools-populator';
 import ToolMapper from '@gik/tools-mapper';
@@ -24,6 +23,7 @@ export const Back = Configurator({ path: Path.cfg, name: ['common', 'back'] });
 export const Front = Configurator({ path: Path.cfg, name: ['common', 'front'] });
 
 // Include the package configuration
+// eslint-disable-next-line global-require
 export const Package = require(PATH.join(Path.root, 'package.json'));
 
 /**
