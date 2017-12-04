@@ -1,4 +1,5 @@
 // Local
+import { TokenValidate } from 'auth/client';
 import { TypeUserOutput } from 'services/users/schema';
 import {
     FieldGetter,
@@ -28,6 +29,10 @@ const get = FieldGetter({
         description: 'Whether the post is visible to the public.',
         type: TypeBoolean,
     },
+    title: {
+        description: 'The title of the publicaction',
+        type: TypeString,
+    },
     content: {
         description: 'The content for the publication.',
         type: TypeString,
@@ -49,7 +54,8 @@ export const TypePostOutput = new TypeOutput({
         _id: get('_id', true),
         user: get('user'),
         public: get('public'),
-        content: get('content', true),
+        title: get('title'),
+        content: get('content'),
         dateAdd: get('dateAdd'),
         dateMod: get('dateMod'),
     },
@@ -61,6 +67,7 @@ export const TypePostInput = new TypeInput({
     fields: {
         user: get('userID', true),
         public: get('public', true),
+        title: get('title', true),
         content: get('content', true),
     },
 });
@@ -86,9 +93,30 @@ export default service => ({ // eslint-disable-line no-unused-vars
             args: {
                 post: { type: TypePostInput },
             },
-            resolve: (root, args) => service.create(args),
+            resolve: (root, { post }, { token }) => TokenValidate(token)
+                .then(() => service.create(post)),
         },
 
+        postMod: {
+            description: 'Modifies an existing post.',
+            type: TypePostOutput,
+            args: {
+                _id: get('_id', true),
+                post: { type: TypePostInput },
+            },
+            resolve: (root, { _id, post }, { token }) => TokenValidate(token)
+                .then(() => service.patch(_id, post)),
+        },
+
+        postDel: {
+            description: 'Deletes existing post.',
+            type: TypePostOutput,
+            args: {
+                _id: get('_id', true),
+            },
+            resolve: (root, { _id }, { token }) => TokenValidate(token)
+                .then(() => service.remove(_id)),
+        },
     },
 
 });

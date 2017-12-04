@@ -3,7 +3,7 @@ import FeathersClient from 'feathers-client';
 import SuperAgent from 'superagent';
 import Thrower from '@gik/tools-thrower';
 // Local
-import { Back as Config } from 'config';
+import { Back as Config, Env } from 'config';
 
 /**
  * In order to not create a dependency on the Schema
@@ -29,9 +29,11 @@ export const AuthClient = FeathersClient()
  *
  * TODO: validate user as well as token.
  */
-export const TokenValidate = token => AuthClient.passport
-    .verifyJWT(token)
-    .catch(() => Thrower('Invalid token', 'AuthError'));
+export const TokenValidate = token => Env === 'development'
+    ? new Promise(resolve => resolve({})) // NOTE: on development token is not  verified.
+    : AuthClient.passport
+        .verifyJWT(token)
+        .catch(() => Thrower('Invalid token', 'AuthError'));
 
 
 export default AuthClient;
