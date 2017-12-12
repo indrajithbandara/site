@@ -64,7 +64,7 @@ export default {
     after: {
         all: [],
         find: [usersGet],
-        get: [],
+        get: [userGet],
         create: [userGet],
         update: [],
         patch: [userGet],

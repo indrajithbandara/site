@@ -76,6 +76,15 @@ export default service => ({ // eslint-disable-line no-unused-vars
 
     Query: {
 
+        post: {
+            description: 'Returns a specific post',
+            type: TypePostOutput,
+            args: {
+                _id: get('_id', true),
+            },
+            resolve: (root, { _id }) => service.get(_id),
+        },
+
         posts: {
             description: 'Returns all the posts',
             type: new TypeList(TypePostOutput),
