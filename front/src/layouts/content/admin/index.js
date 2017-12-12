@@ -14,7 +14,7 @@ export const Component = () => <section>
     </h2>
     <RouterSwitch>
         <Route exact={ true } path="/admin/users" component={ LayoutContentAdminUsers }/>
-        <Route exact={ true } path="/admin/posts" component={ LayoutContentAdminPosts }/>
+        <Route exact={ true } path="/admin/posts/:_id?" component={ LayoutContentAdminPosts }/>
 
         {/* --------------------------------------------------------------------- Home */}
 

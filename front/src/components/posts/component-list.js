@@ -5,7 +5,7 @@ import { graphql as WithApolloGraphQL, compose as WithApolloCompose } from 'reac
 // Local
 import ComponentLoading from 'components/loading';
 import {
-    QueryList as SchemaQueryList,
+    QueryPosts as SchemaQueryPosts,
     MutationDel as SchemaMutationDel,
 } from './schema';
 
@@ -46,9 +46,9 @@ export class Component extends React.Component {
             .mutationDel({
                 variables: { _id },
                 update(store) {
-                    const data = store.readQuery({ query: SchemaQueryList });
+                    const data = store.readQuery({ query: SchemaQueryPosts });
                     data.posts.splice(data.posts.map(post => post._id).indexOf(_id), 1);
-                    store.writeQuery({ query: SchemaQueryList, data });
+                    store.writeQuery({ query: SchemaQueryPosts, data });
                 },
             })
             .then(() => this.setState({ loading: false }));
@@ -60,7 +60,7 @@ Object.defineProperty(Component, 'name', { value: 'ComponentAdmin' });
 
 export default WithApolloCompose(
     // Fetches all posts
-    WithApolloGraphQL(SchemaQueryList),
+    WithApolloGraphQL(SchemaQueryPosts),
     // Deletes a post
     WithApolloGraphQL(SchemaMutationDel, { name: 'mutationDel' }),
 )(Component);

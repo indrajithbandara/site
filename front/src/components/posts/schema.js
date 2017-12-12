@@ -1,7 +1,13 @@
 import GQL from 'graphql-tag';
 
-export const QueryList = GQL`query {
+export const QueryPosts = GQL`query {
     posts { _id, title, dateAdd }
+}`;
+
+export const QueryPost = GQL`query ($_id: ID!) {
+    post (_id: $_id) {
+        title, content, public, dateAdd
+    }
 }`;
 
 export const MutationDel = GQL`mutation ($_id: ID!){
@@ -9,6 +15,7 @@ export const MutationDel = GQL`mutation ($_id: ID!){
 }`;
 
 export default {
-    queryList: QueryList,
+    queryPosts: QueryPosts,
+    queryPost: QueryPost,
     mutationDel: MutationDel,
 };
