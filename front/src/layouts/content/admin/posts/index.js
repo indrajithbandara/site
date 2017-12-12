@@ -1,30 +1,10 @@
 import React from 'react';
-import { Editor, EditorState } from 'draft-js';
-import 'Draft.css'; // eslint-disable-line
+// Local
+import { List as ComponentList } from 'components/posts';
 
-export const State = {
-    editor: EditorState.createEmpty(),
-};
+export const Component = () => <React.Fragment>
+    <h2>Artículos</h2>
+    <ComponentList/>
+</React.Fragment>;
 
-export class Component extends React.Component {
-
-    state = State
-
-    render() {
-        return <section>
-            <h3>Artículos</h3>
-            <Editor
-                placeholder="Contenido"
-                editorState={ this.state.editor }
-                onChange={ this.handleChange.bind(this) }
-            />
-        </section>;
-    }
-
-    handleChange(editor) {
-        this.setState({ editor });
-    }
-}
-
-Object.defineProperty(Component, 'name', { value: 'LayoutContentAdminPosts' });
 export default Component;

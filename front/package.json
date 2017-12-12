@@ -1,6 +1,6 @@
 {
     "name": "@etor/site.front",
-    "version": "0.0.29",
+    "version": "0.0.30",
     "description": "The frontend for my personal website.",
     "license": "MIT",
     "private": true,
@@ -51,17 +51,21 @@
         "apollo-cache-inmemory": "^1.1.2",
         "apollo-client": "^2.1.0",
         "apollo-link": "^1.0.5",
-        "apollo-link-context": "^1.0.1",
         "apollo-link-http": "^1.3.0",
         "apollo-link-ws": "^1.0.1",
         "apollo-utilities": "^1.0.3",
+        "date-fns": "^1.29.0",
         "graphql": "^0.11.7",
         "graphql-tag": "^2.5.0",
+        "immutable": "^3.8.2",
+        "prismjs": "^1.8.4",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
         "react-apollo": "^2.0.1",
         "react-dom": "^16.2.0",
         "react-router-dom": "^4.2.2",
+        "slate": "^0.31.3",
+        "slate-react": "^0.10.17",
         "subscriptions-transport-ws": "^0.9.2"
     },
     "devDependencies": {
@@ -76,6 +80,7 @@
         "html-loader": "^0.5.1",
         "html-webpack-plugin": "^2.30.1",
         "style-loader": "^0.19.0",
+        "tern": "^0.21.0",
         "tern-jsx": "^1.0.3"
     }
 }
